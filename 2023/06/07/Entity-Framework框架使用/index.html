@@ -20,30 +20,36 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="生似浮游">
-<meta property="og:type" content="website">
-<meta property="og:title" content="储藏库">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="Entity Framework Core基础entity framework是微软官方的ORM框架，所谓ORM（object relational mapping，对象关系映射）中的对象即使C#中的对象，关系指的是关系数据库，如mysql，sqlserver等，映射是指在关系数据库与C#对象之间架起一座桥梁，让我们只需要操作C#对象就可以将数据插入数据库，而不需要sql语句。 Sqlite上使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Entity Framework框架使用">
+<meta property="og:url" content="http://example.com/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/index.html">
 <meta property="og:site_name" content="储藏库">
-<meta property="og:description" content="生似浮游">
+<meta property="og:description" content="Entity Framework Core基础entity framework是微软官方的ORM框架，所谓ORM（object relational mapping，对象关系映射）中的对象即使C#中的对象，关系指的是关系数据库，如mysql，sqlserver等，映射是指在关系数据库与C#对象之间架起一座桥梁，让我们只需要操作C#对象就可以将数据插入数据库，而不需要sql语句。 Sqlite上使用">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/image-20230608115439450.png">
+<meta property="og:image" content="http://example.com/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/image-20230608115530635.png">
+<meta property="article:published_time" content="2023-06-07T12:05:23.000Z">
+<meta property="article:modified_time" content="2023-06-08T03:59:45.336Z">
 <meta property="article:author" content="lycheewang">
+<meta property="article:tag" content="dotnet,EFCore">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/image-20230608115439450.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>储藏库</title>
+  <title>Entity Framework框架使用 | 储藏库</title>
   
 
 
@@ -141,9 +147,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -159,10 +166,9 @@
       <meta itemprop="name" content="储藏库">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Entity Framework框架使用</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          Entity Framework框架使用
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -192,7 +198,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="Entity-Framework-Core基础"><a href="#Entity-Framework-Core基础" class="headerlink" title="Entity Framework Core基础"></a>Entity Framework Core基础</h1><p>entity framework是微软官方的ORM框架，所谓ORM（object relational mapping，对象关系映射）中的对象即使C#中的对象，关系指的是关系数据库，如mysql，sqlserver等，映射是指在关系数据库与C#对象之间架起一座桥梁，让我们只需要操作C#对象就可以将数据插入数据库，而不需要sql语句。</p>
+        <h1 id="Entity-Framework-Core基础"><a href="#Entity-Framework-Core基础" class="headerlink" title="Entity Framework Core基础"></a>Entity Framework Core基础</h1><p>entity framework是微软官方的ORM框架，所谓ORM（object relational mapping，对象关系映射）中的对象即使C#中的对象，关系指的是关系数据库，如mysql，sqlserver等，映射是指在关系数据库与C#对象之间架起一座桥梁，让我们只需要操作C#对象就可以将数据插入数据库，而不需要sql语句。</p>
 <h2 id="Sqlite上使用EFCore"><a href="#Sqlite上使用EFCore" class="headerlink" title="Sqlite上使用EFCore"></a>Sqlite上使用EFCore</h2><h3 id="添加依赖："><a href="#添加依赖：" class="headerlink" title="添加依赖："></a>添加依赖：</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Install-Package</span> Microsoft.EntityFrameworkCore.Sqlite</span><br></pre></td></tr></table></figure>
 
 <h3 id="创建模型："><a href="#创建模型：" class="headerlink" title="创建模型："></a>创建模型：</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.EntityFrameworkCore;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BloggingContext</span> : <span class="title">DbContext</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> DbSet&lt;Blog&gt; Blogs &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> DbSet&lt;Post&gt; Posts &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> DbPath &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BloggingContext</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> folder = Environment.SpecialFolder.LocalApplicationData;</span><br><span class="line">        <span class="keyword">var</span> path = Environment.GetFolderPath(folder);</span><br><span class="line">        DbPath = System.IO.Path.Join(path, <span class="string">&quot;blogging.db&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The following configures EF to create a Sqlite database file in the</span></span><br><span class="line">    <span class="comment">// special &quot;local&quot; folder for your platform.</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnConfiguring</span>(<span class="params">DbContextOptionsBuilder options</span>)</span></span><br><span class="line">        =&gt; options.UseSqlite(<span class="string">$&quot;Data Source=<span class="subst">&#123;DbPath&#125;</span>&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Blog</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> BlogId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Url &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;Post&gt; Posts &#123; <span class="keyword">get</span>; &#125; = <span class="keyword">new</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Post</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> PostId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Title &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Content &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> BlogId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> Blog Blog &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -225,21 +231,26 @@
 <p><img src="/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/image-20230608115530635.png" alt="image-20230608115530635"></p>
 <p><strong>注意，这只在数据库设计时生效。</strong></p>
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
+          <div class="post-tags">
+              <a href="/tags/dotnet-EFCore/" rel="tag"># dotnet,EFCore</a>
+          </div>
+
+        
+
+
+        
       </footer>
+    
   </article>
   
   
-  
-
-
   
 
 
@@ -292,6 +303,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Entity-Framework-Core%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">Entity Framework Core基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sqlite%E4%B8%8A%E4%BD%BF%E7%94%A8EFCore"><span class="nav-number">1.1.</span> <span class="nav-text">Sqlite上使用EFCore</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96%EF%BC%9A"><span class="nav-number">1.1.1.</span> <span class="nav-text">添加依赖：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%A8%A1%E5%9E%8B%EF%BC%9A"><span class="nav-number">1.1.2.</span> <span class="nav-text">创建模型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E5%BA%93%E8%BF%81%E7%A7%BB"><span class="nav-number">1.1.3.</span> <span class="nav-text">数据库迁移</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E3%80%81%E8%AF%BB%E5%8F%96%E3%80%81%E6%9B%B4%E6%96%B0%E5%92%8C%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE%EF%BC%88CRUD%EF%BC%89"><span class="nav-number">1.1.4.</span> <span class="nav-text">创建、读取、更新和删除数据（CRUD）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E7%B1%BB%E5%BA%93%EF%BC%88%E5%88%86%E5%B1%82%E9%A1%B9%E7%9B%AE%EF%BC%89%E4%B8%AD%E4%BD%BF%E7%94%A8EFCore"><span class="nav-number">1.2.</span> <span class="nav-text">在类库（分层项目）中使用EFCore</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
