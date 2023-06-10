@@ -28,7 +28,7 @@
 <meta property="og:description" content="基本springboot结构SpringBoot引导类的内容如下： 12345678910111213package tacos;import org.springframework.boot.SpringApplication;import org.springframework.boot.autoconfigure.SpringBootApplication;@SpringBootApplic">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-06-10T01:59:44.000Z">
-<meta property="article:modified_time" content="2023-06-10T02:04:06.326Z">
+<meta property="article:modified_time" content="2023-06-10T02:20:17.420Z">
 <meta property="article:author" content="lycheewang">
 <meta property="article:tag" content="Springboot">
 <meta name="twitter:card" content="summary">
@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2023-06-10 09:59:44 / 修改时间：10:04:06" itemprop="dateCreated datePublished" datetime="2023-06-10T09:59:44+08:00">2023-06-10</time>
+              <time title="创建时间：2023-06-10 09:59:44 / 修改时间：10:20:17" itemprop="dateCreated datePublished" datetime="2023-06-10T09:59:44+08:00">2023-06-10</time>
             </span>
 
           
@@ -199,6 +199,8 @@
 <li><code>@ComponentScan</code>:启动组件扫描，这样当我们用<code>@Controller</code>,<code>@Service</code>和<code>@Component</code>注解声明其他类时，<code>Spring Boot</code>会自动发现他们并将其注册为<code>Spring</code>应用上下文组件。</li>
 </ul>
 <p><code>main</code>方法是模板方法，在所有的<code>SpringBoot</code>项目中都几乎会有一样的内容，其中调用<code>SpringApplication</code>的静态方法<code>run()</code>，其具有两个参数，第一个是配置类，这里是传入引导类，但不一定要传入引导类，但这是最常用和便捷的方法。其次是命令行参数。</p>
+<span id="more"></span>
+
 <p>引导类中的内容不一定要改变，在小型项目中可以直接在引导类中配置组件。但一般会创建多个配置类文件，分别配置不同的组件。</p>
 <p><code>SpringBoot</code>测试类的内容如下：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TacoCloudApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
