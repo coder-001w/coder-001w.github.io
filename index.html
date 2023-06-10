@@ -147,6 +147,89 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/%E5%9F%BA%E6%9C%ACspringboot%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lycheewang">
+      <meta itemprop="description" content="生似浮游">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="储藏库">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/06/10/%E5%9F%BA%E6%9C%ACspringboot%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">基本springboot结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-10 09:59:44 / 修改时间：10:04:06" itemprop="dateCreated datePublished" datetime="2023-06-10T09:59:44+08:00">2023-06-10</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="基本springboot结构"><a href="#基本springboot结构" class="headerlink" title="基本springboot结构"></a>基本<code>springboot</code>结构</h1><p><code>SpringBoot</code>引导类的内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TacoCloudApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(TacoCloudApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在主类中<code>@SpringBootApplication</code>注解表明这是一个<code>SpringBoot</code>应用。其是三个注解的组合：</p>
+<ul>
+<li><code>@SpringBootConfiguration</code>:声明该类为配置类，是<code>@Configuration</code>的特殊形式。</li>
+<li><code>@EnableAutoConfiguration</code>:启用Spring Boot自动配置，告诉<code>Spring Boot</code>自动配置他认为我们应该用到的组件。</li>
+<li><code>@ComponentScan</code>:启动组件扫描，这样当我们用<code>@Controller</code>,<code>@Service</code>和<code>@Component</code>注解声明其他类时，<code>Spring Boot</code>会自动发现他们并将其注册为<code>Spring</code>应用上下文组件。</li>
+</ul>
+<p><code>main</code>方法是模板方法，在所有的<code>SpringBoot</code>项目中都几乎会有一样的内容，其中调用<code>SpringApplication</code>的静态方法<code>run()</code>，其具有两个参数，第一个是配置类，这里是传入引导类，但不一定要传入引导类，但这是最常用和便捷的方法。其次是命令行参数。</p>
+<p>引导类中的内容不一定要改变，在小型项目中可以直接在引导类中配置组件。但一般会创建多个配置类文件，分别配置不同的组件。</p>
+<p><code>SpringBoot</code>测试类的内容如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TacoCloudApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>测试类中有一个空的测试方法，<code>@SpringBootTest</code>会为测试加载<code>Spring</code>上下文。</p>
+<p>一个简单的控制器类：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HomeController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">home</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;home&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>其中，<code>@Controller</code>让组件扫描将这个类识别为一个组件，正是因为<code>HomeController</code>有这个注解，<code>spring</code>的组件扫描才会扫描到他，并创建一个<code>HomeController</code>实例作为<code>spring</code>上下文的<code>bean</code>,还有一些注解实现与它完全相同的功能，如<code>@Service</code>，<code>@Component</code>，<code>@Repository</code>，他们的效果完全相同，只不过<code>@Controller</code>更能描述这个类的角色。</p>
+<p><code>@GetMapping(&quot;/&quot;)</code>是指添加这个注解的方法相应针对<code>&quot;/&quot;</code>这个路径的<code>Http Get</code>请求，返回的字符串<code>&quot;home&quot;</code>实际上会被解析为视图的逻辑名，即位于<code>templates</code>目录下的<code>home.html</code>文件。</p>
+<p>视图中所用到的静态资源如图片等，是放在<code>static</code>目录下。</p>
+<p>测试控制器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</span><br><span class="line"><span class="keyword">import</span> tacos.controller.HomeController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.containsString;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebMvcTest(HomeController.class)</span></span><br><span class="line"><span class="comment">//@RunWith(SpringRunner.class)    // 本来是没有的</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TacoCloudApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        mockMvc.perform(get(<span class="string">&quot;/&quot;</span>))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(view().name(<span class="string">&quot;home&quot;</span>))</span><br><span class="line">                .andExpect(content().string(containsString(<span class="string">&quot;Welcome to...&quot;</span>)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不需要<code>@RunWith</code>注解也可以，实际上默认是没有这个注解的。将默认的<code>@SpringBootTest</code>注解换成了<code>@WebMvcTest()</code>，其中接收的参数即为控制器类，它使得这个测试在Spring MVC应用的上下文运行，会让HomeController注入到Spring Mvc中，这样就能向它发起请求。注入了一个MockMvc，以实现测试。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -178,7 +261,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-08 15:06:59" itemprop="dateModified" datetime="2023-06-08T15:06:59+08:00">2023-06-08</time>
+                <time title="修改时间：2023-06-10 10:03:07" itemprop="dateModified" datetime="2023-06-10T10:03:07+08:00">2023-06-10</time>
               </span>
 
           
@@ -305,12 +388,12 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">2</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
