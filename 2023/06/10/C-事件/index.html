@@ -20,30 +20,33 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="生似浮游">
-<meta property="og:type" content="website">
-<meta property="og:title" content="储藏库">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="事件介绍：基于委托实现，是对象用于向系统中所有相关组件广播消息的方式。其他任何组件都可以向事件源订阅事件，并在事件引发时得到通知。 可以定义应针对类引发的事件。 使用事件时，需要注意的一点是特定事件可能没有任何注册的对象。 必须编写代码，以确保在未配置侦听器时不会引发事件。 通过订阅事件，还可在两个对象（事件源和事件接收器）之间创建耦合。 需要确保当不再对事件感兴趣时，事件接收器将从事件源取消订阅">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C#事件">
+<meta property="og:url" content="http://example.com/2023/06/10/C-%E4%BA%8B%E4%BB%B6/index.html">
 <meta property="og:site_name" content="储藏库">
-<meta property="og:description" content="生似浮游">
+<meta property="og:description" content="事件介绍：基于委托实现，是对象用于向系统中所有相关组件广播消息的方式。其他任何组件都可以向事件源订阅事件，并在事件引发时得到通知。 可以定义应针对类引发的事件。 使用事件时，需要注意的一点是特定事件可能没有任何注册的对象。 必须编写代码，以确保在未配置侦听器时不会引发事件。 通过订阅事件，还可在两个对象（事件源和事件接收器）之间创建耦合。 需要确保当不再对事件感兴趣时，事件接收器将从事件源取消订阅">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-06-10T02:10:08.000Z">
+<meta property="article:modified_time" content="2023-06-10T02:12:19.766Z">
 <meta property="article:author" content="lycheewang">
+<meta property="article:tag" content="C#">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/06/10/C-%E4%BA%8B%E4%BB%B6/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>储藏库</title>
+  <title>C#事件 | 储藏库</title>
   
 
 
@@ -141,9 +144,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
+
+    
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -159,10 +163,9 @@
       <meta itemprop="name" content="储藏库">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/C-%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">C#事件</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          C#事件
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -186,7 +189,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="事件介绍："><a href="#事件介绍：" class="headerlink" title="事件介绍："></a>事件介绍：</h2><p>基于委托实现，是对象用于向系统中所有相关组件广播消息的方式。其他任何组件都可以向<strong>事件源订阅事件</strong>，并在事件引发时得到通知。</p>
+        <h2 id="事件介绍："><a href="#事件介绍：" class="headerlink" title="事件介绍："></a>事件介绍：</h2><p>基于委托实现，是对象用于向系统中所有相关组件广播消息的方式。其他任何组件都可以向<strong>事件源订阅事件</strong>，并在事件引发时得到通知。</p>
 <p>可以定义应针对<strong>类引发的事件</strong>。 使用事件时，需要注意的一点是特定事件可能没有任何注册的对象。 <strong>必须编写代码，以确保在未配置侦听器时不会引发事件。</strong></p>
 <p>通过订阅事件，还可在两个对象（事件源和事件接收器）之间创建耦合。 需要确保当不再对事件感兴趣时，事件接收器将从事件源取消订阅。</p>
 <h2 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h2><p>事件的语言设计针对这些目标：</p>
@@ -259,367 +262,33 @@
 <figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">BaseClassEvents</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// Special EventArgs class to hold info about Shapes.</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ShapeEventArgs</span> : <span class="title">EventArgs</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ShapeEventArgs</span>(<span class="params"><span class="built_in">double</span> area</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            NewArea = area;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">double</span> NewArea &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Base class event publisher</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">class</span> <span class="title">Shape</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">protected</span> <span class="built_in">double</span> _area;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">public</span> <span class="built_in">double</span> Area</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">get</span> =&gt; _area;</span><br><span class="line">            <span class="keyword">set</span> =&gt; _area = <span class="keyword">value</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// The event. Note that by using the generic EventHandler&lt;T&gt; event type</span></span><br><span class="line">        <span class="comment">// we do not need to declare a separate delegate type.</span></span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">event</span> EventHandler&lt;ShapeEventArgs&gt; ShapeChanged;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">Draw</span>()</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//The event-invoking method that derived classes can override.</span></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">virtual</span> <span class="keyword">void</span> <span class="title">OnShapeChanged</span>(<span class="params">ShapeEventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Safely raise the event for all subscribers</span></span><br><span class="line">            ShapeChanged?.Invoke(<span class="keyword">this</span>, e);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Circle</span> : <span class="title">Shape</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="built_in">double</span> _radius;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Circle</span>(<span class="params"><span class="built_in">double</span> radius</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _radius = radius;</span><br><span class="line">            _area = <span class="number">3.14</span> * _radius * _radius;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Update</span>(<span class="params"><span class="built_in">double</span> d</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _radius = d;</span><br><span class="line">            _area = <span class="number">3.14</span> * _radius * _radius;</span><br><span class="line">            OnShapeChanged(<span class="keyword">new</span> ShapeEventArgs(_area));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnShapeChanged</span>(<span class="params">ShapeEventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Do any circle-specific processing here.</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// Call the base class event invocation method.</span></span><br><span class="line">            <span class="keyword">base</span>.OnShapeChanged(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Draw</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Drawing a circle&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Rectangle</span> : <span class="title">Shape</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="built_in">double</span> _length;</span><br><span class="line">        <span class="keyword">private</span> <span class="built_in">double</span> _width;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Rectangle</span>(<span class="params"><span class="built_in">double</span> length, <span class="built_in">double</span> width</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _length = length;</span><br><span class="line">            _width = width;</span><br><span class="line">            _area = _length * _width;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Update</span>(<span class="params"><span class="built_in">double</span> length, <span class="built_in">double</span> width</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _length = length;</span><br><span class="line">            _width = width;</span><br><span class="line">            _area = _length * _width;</span><br><span class="line">            OnShapeChanged(<span class="keyword">new</span> ShapeEventArgs(_area));	<span class="comment">//当形状改变时引发事件</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnShapeChanged</span>(<span class="params">ShapeEventArgs e</span>)	<span class="comment">//引发事件</span></span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// Do any rectangle-specific processing here.</span></span><br><span class="line"></span><br><span class="line">            <span class="comment">// Call the base class event invocation method.</span></span><br><span class="line">            <span class="keyword">base</span>.OnShapeChanged(e);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Draw</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Drawing a rectangle&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Represents the surface on which the shapes are drawn</span></span><br><span class="line">    <span class="comment">// Subscribes to shape events so that it knows</span></span><br><span class="line">    <span class="comment">// when to redraw a shape.</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ShapeContainer</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">private</span> <span class="keyword">readonly</span> List&lt;Shape&gt; _list;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">ShapeContainer</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            _list = <span class="keyword">new</span> List&lt;Shape&gt;();</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">AddShape</span>(<span class="params">Shape shape</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            _list.Add(shape);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Subscribe to the base class event.</span></span><br><span class="line">            shape.ShapeChanged += HandleShapeChanged;	<span class="comment">//添加事件处理程序</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// ...Other methods to draw, resize, etc.</span></span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">HandleShapeChanged</span>(<span class="params"><span class="built_in">object</span> sender, ShapeEventArgs e</span>)</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (sender <span class="keyword">is</span> Shape shape)</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// Diagnostic message for demonstration purposes.</span></span><br><span class="line">                Console.WriteLine(<span class="string">$&quot;Received event. Shape area is now <span class="subst">&#123;e.NewArea&#125;</span>&quot;</span>);</span><br><span class="line"></span><br><span class="line">                <span class="comment">// Redraw the shape here.</span></span><br><span class="line">                shape.Draw();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">class</span> <span class="title">Test</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">Main</span>()</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">//Create the event publishers and subscriber</span></span><br><span class="line">            <span class="keyword">var</span> circle = <span class="keyword">new</span> Circle(<span class="number">54</span>);</span><br><span class="line">            <span class="keyword">var</span> rectangle = <span class="keyword">new</span> Rectangle(<span class="number">12</span>, <span class="number">9</span>);</span><br><span class="line">            <span class="keyword">var</span> container = <span class="keyword">new</span> ShapeContainer();</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Add the shapes to the container.</span></span><br><span class="line">            container.AddShape(circle);</span><br><span class="line">            container.AddShape(rectangle);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Cause some events to be raised.</span></span><br><span class="line">            circle.Update(<span class="number">57</span>);</span><br><span class="line">            rectangle.Update(<span class="number">7</span>, <span class="number">7</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">// Keep the console window open in debug mode.</span></span><br><span class="line">            Console.WriteLine(<span class="string">&quot;Press any key to continue...&quot;</span>);</span><br><span class="line">            Console.ReadKey();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* Output:</span></span><br><span class="line"><span class="comment">        Received event. Shape area is now 10201.86</span></span><br><span class="line"><span class="comment">        Drawing a circle</span></span><br><span class="line"><span class="comment">        Received event. Shape area is now 49</span></span><br><span class="line"><span class="comment">        Drawing a rectangle</span></span><br><span class="line"><span class="comment"> */</span></span><br></pre></td></tr></table></figure>
 
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C#</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/C-%E6%B3%9B%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/C-%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">C#泛型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-10 10:09:55 / 修改时间：10:11:46" itemprop="dateCreated datePublished" datetime="2023-06-10T10:09:55+08:00">2023-06-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="泛型类型描述"><a href="#泛型类型描述" class="headerlink" title="泛型类型描述"></a>泛型类型描述</h2><p>使用描述性名称命名泛型类型参数，除非单个字母名称完全具有自我说明性且描述性名称不会增加任何作用。</p>
-<p>对具有单个字母类型参数的类型，考虑使用 T 作为类型参数名称。</p>
-<p>在类型参数描述性名称前添加前缀 “T”。</p>
-<h2 id="类型参数的约束"><a href="#类型参数的约束" class="headerlink" title="类型参数的约束"></a>类型参数的约束</h2><p> 在没有任何约束的情况下，类型参数可以是任何类型。 编译器只能假定 <code>System.Object</code> 的成员，它是任何 .NET 类型的最终基类。可以使用where T : struct, class来约束类型参数类型。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">EmployeeList</span>&lt;<span class="title">T</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">Employee</span>, <span class="title">IEmployee</span>, <span class="title">System.IComparable</span>&lt;<span class="title">T</span>&gt;, <span class="title">new</span>()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="约束多个参数"><a href="#约束多个参数" class="headerlink" title="约束多个参数"></a>约束多个参数</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Base</span> &#123; &#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title">Test</span>&lt;<span class="title">T</span>, <span class="title">U</span>&gt;</span><br><span class="line">    <span class="keyword">where</span> <span class="title">U</span> : <span class="title">struct</span></span><br><span class="line">    <span class="keyword">where</span> <span class="title">T</span> : <span class="title">Base</span>, <span class="title">new</span>()	<span class="comment">//T必须要有无参构造器，值类型有隐含的无参构造，应用类型若没有有参构造，默认有无参构造</span></span><br><span class="line">&#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="未绑定的类型参数"><a href="#未绑定的类型参数" class="headerlink" title="未绑定的类型参数"></a>未绑定的类型参数</h3><p><strong>没有约束的类型参数（如公共类 <code>SampleClass&lt;T&gt;&#123;&#125;</code> 中的 T）称为未绑定的类型参数</strong>。 未绑定的类型参数具有以下规则：</p>
-<ul>
-<li>不能使用 <code>!=</code> 和 <code>==</code> 运算符，因为无法保证具体的类型参数能支持这些运算符。</li>
-<li>可以在它们与 <code>System.Object</code> 之间来回转换，或将它们显式转换为任何接口类型。</li>
-<li>可以将它们与 null进行比较。 将未绑定的参数与 <code>null</code> 进行比较时，如果类型参数为值类型，则该比较将始终返回 false。</li>
-</ul>
-<h3 id="类型参数作为约束"><a href="#类型参数作为约束" class="headerlink" title="类型参数作为约束"></a>类型参数作为约束</h3><p>在具有自己类型参数的成员函数必须将该参数约束为包含类型的类型参数时，将泛型类型参数用作约束非常有用，如下例所示：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">List</span>&lt;<span class="title">T</span>&gt;</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Add</span>&lt;<span class="title">U</span>&gt;(<span class="params">List&lt;U&gt; items</span>) <span class="keyword">where</span> U : T</span> &#123;<span class="comment">/*...*/</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在上述示例中，<code>T</code> 在 <code>Add</code> 方法的上下文中是一个类型约束，而在 <code>List</code> 类的上下文中是一个未绑定的类型参数.</p>
-<p>类型参数还可在泛型类定义中用作约束。 必须在尖括号中声明该类型参数以及任何其他类型参数：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Type parameter V is used as a type constraint.</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">SampleClass</span>&lt;<span class="title">T</span>, <span class="title">U</span>, <span class="title">V</span>&gt; <span class="keyword">where</span> <span class="title">T</span> : <span class="title">V</span> &#123; &#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h2><p><strong>泛型用作参数，用作返回值，用作局部变量</strong></p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="title">show</span>&lt;<span class="title">T</span>&gt;(<span class="params">T param</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(param.GetType().name+<span class="string">&quot; &quot;</span>+param);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> T <span class="title">show</span>&lt;<span class="title">T</span>&gt;()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">default</span>(T);	<span class="comment">//如果是引用类型，返回null，值类型返回0</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="title">void</span> &lt;T&gt; <span class="title">show</span>(<span class="params"><span class="built_in">int</span> a, <span class="built_in">int</span> b</span>)</span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">show&lt;<span class="built_in">int</span>&gt;(<span class="number">123</span>);</span><br><span class="line">show&lt;<span class="built_in">string</span>&gt;(<span class="string">&quot;Hello!&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<h2 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h2><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;<span class="built_in">int</span>&gt; intList = <span class="keyword">new</span>();</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">MyList</span>&lt;<span class="title">T</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//里面的属性、方法都可以用T。</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        
 
 
-      
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/10/C-%E6%B3%9B%E5%9E%8B/" rel="prev" title="C#泛型">
+      <i class="fa fa-chevron-left"></i> C#泛型
+    </a></div>
+      <div class="post-nav-item"></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/C-%E5%8F%8D%E5%B0%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/C-%E5%8F%8D%E5%B0%84/" class="post-title-link" itemprop="url">C#反射</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-10 10:09:39 / 修改时间：10:11:11" itemprop="dateCreated datePublished" datetime="2023-06-10T10:09:39+08:00">2023-06-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="反射介绍"><a href="#反射介绍" class="headerlink" title="反射介绍"></a>反射介绍</h2><p>反射是操作dll文件的一个类库，使用反射通常包含以下两个过程</p>
-<p>1.找到dll文件 </p>
-<p>2.通过反射类库里面的各种方法操作dll文件  </p>
-<h3 id="找到dll文件"><a href="#找到dll文件" class="headerlink" title="找到dll文件"></a>找到dll文件</h3><p>通过<code>assembly</code>的静态方法找到程序集。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Assembly assembly1 = Assembly.Load(<span class="string">&quot;&quot;</span>);  <span class="comment">//通过指定名称方式加载，必须在当前项目的bin目录下.可设置引用避免手动复制</span></span><br><span class="line">Assembly assembly2 = Assembly.LoadFile(<span class="string">&quot;&quot;</span>); <span class="comment">//通过dll文件完整路径</span></span><br><span class="line">Assembly assembly3 = Assembly.LoadFrom(<span class="string">&quot;&quot;</span>); <span class="comment">//传入上面两种都可以，但是要加扩展名.dll</span></span><br></pre></td></tr></table></figure>
-
-<p>此外还有许多静态方法获取程序集：GetCallingAssembly，GetExacutingAssembly，GetEntryAssembly之类</p>
-<h3 id="操作dll文件"><a href="#操作dll文件" class="headerlink" title="操作dll文件"></a>操作dll文件</h3><p>动态实例化某个类，首先要获取指定类型。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Type type1 = assembly1.GetType(<span class="string">&quot;MyReflectionTest.Class1&quot;</span>);	<span class="comment">//参数是某个程序集里的类</span></span><br></pre></td></tr></table></figure>
-
-<p>通过activator来实例化</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">object</span> obj1 = Activator.CreateInstance(type1)	<span class="comment">//无参构造，如果需要有参构造则</span></span><br><span class="line"><span class="built_in">object</span> obj2 = Activator.CreateInstance(type1,<span class="keyword">new</span> <span class="built_in">object</span>[] &#123;<span class="string">&quot;hello&quot;</span>&#125;);	<span class="comment">//第二个参数是object数组，传递有参构造参数</span></span><br><span class="line"><span class="built_in">object</span> obj3 = Activator.CreateInstance(type1,<span class="literal">true</span>);<span class="comment">//通过反射调用私有构造方法</span></span><br></pre></td></tr></table></figure>
-
-<p>得到<code>Assembly</code>以后可得到该程序集下的所有类</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">查找所有的类type/构造方法/参数</span><br><span class="line"><span class="keyword">foreach</span>(<span class="keyword">var</span> item <span class="keyword">in</span> assembly1.GetTypes())</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(item.Name);</span><br><span class="line">    <span class="comment">//之后可以实例化</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">foreach</span> (<span class="keyword">var</span> cotr <span class="keyword">in</span> type1.GetConstructors(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public))</span><br><span class="line">&#123;</span><br><span class="line">    Console.WriteLine(<span class="string">&quot;构造方法&quot;</span> + cotr.Name);</span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">var</span> param <span class="keyword">in</span> cotr.GetParameters())</span><br><span class="line">    &#123;</span><br><span class="line">        Console.WriteLine(param.ParameterType);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>得到type之后，可以通过其<code>GetMethod</code>方法获取里面的方法。根据是否是泛型方法，私有方法，得到method的过程也不同。</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> method = type1.GetMethod(<span class="string">&quot;方法名&quot;</span>,BindingFlags.);	<span class="comment">//普通方法的调用，第二个参数指定要找的方法类型，是否公共等</span></span><br><span class="line"><span class="keyword">var</span> method = type1.GetMethod(<span class="string">&quot;方法名&quot;</span>).MakeGenericMethod(<span class="keyword">new</span> <span class="built_in">object</span>[]&#123;&#125;);<span class="comment">//泛型方法的调用，object数组传入泛型类型typeof()</span></span><br><span class="line"></span><br><span class="line">mrthod.invoke(obj,<span class="keyword">new</span> <span class="built_in">object</span>[]&#123;&#125;);	<span class="comment">//方法的调用需要传递反射得到的对象以及方法参数</span></span><br><span class="line">    </span><br></pre></td></tr></table></figure>
-
-
-
-<p>得到泛型类与普通类有所不同，其名称之后有&#96;n，n为泛型参数个数,并且之后也要有</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Type type1 = assembly1.GetType(<span class="string">&quot;MyReflectionTest.Class1`2&quot;</span>).MakeGenericType(<span class="keyword">new</span> objects[]&#123;<span class="keyword">typeof</span>()&#125;);	<span class="comment">//要得到的是某个泛型类，其具有2个泛型参数,object数组传入type</span></span><br></pre></td></tr></table></figure>
-
-<p>也可以设置属性值和获取属性值。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/%E5%9F%BA%E6%9C%ACspringboot%E7%BB%93%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/%E5%9F%BA%E6%9C%ACspringboot%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">基本springboot结构</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-10 09:59:44 / 修改时间：10:04:06" itemprop="dateCreated datePublished" datetime="2023-06-10T09:59:44+08:00">2023-06-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基本springboot结构"><a href="#基本springboot结构" class="headerlink" title="基本springboot结构"></a>基本<code>springboot</code>结构</h1><p><code>SpringBoot</code>引导类的内容如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TacoCloudApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(TacoCloudApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在主类中<code>@SpringBootApplication</code>注解表明这是一个<code>SpringBoot</code>应用。其是三个注解的组合：</p>
-<ul>
-<li><code>@SpringBootConfiguration</code>:声明该类为配置类，是<code>@Configuration</code>的特殊形式。</li>
-<li><code>@EnableAutoConfiguration</code>:启用Spring Boot自动配置，告诉<code>Spring Boot</code>自动配置他认为我们应该用到的组件。</li>
-<li><code>@ComponentScan</code>:启动组件扫描，这样当我们用<code>@Controller</code>,<code>@Service</code>和<code>@Component</code>注解声明其他类时，<code>Spring Boot</code>会自动发现他们并将其注册为<code>Spring</code>应用上下文组件。</li>
-</ul>
-<p><code>main</code>方法是模板方法，在所有的<code>SpringBoot</code>项目中都几乎会有一样的内容，其中调用<code>SpringApplication</code>的静态方法<code>run()</code>，其具有两个参数，第一个是配置类，这里是传入引导类，但不一定要传入引导类，但这是最常用和便捷的方法。其次是命令行参数。</p>
-<p>引导类中的内容不一定要改变，在小型项目中可以直接在引导类中配置组件。但一般会创建多个配置类文件，分别配置不同的组件。</p>
-<p><code>SpringBoot</code>测试类的内容如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TacoCloudApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>测试类中有一个空的测试方法，<code>@SpringBootTest</code>会为测试加载<code>Spring</code>上下文。</p>
-<p>一个简单的控制器类：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos.controller;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Controller</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">HomeController</span> &#123;</span><br><span class="line">    <span class="meta">@GetMapping(&quot;/&quot;)</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">home</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;home&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中，<code>@Controller</code>让组件扫描将这个类识别为一个组件，正是因为<code>HomeController</code>有这个注解，<code>spring</code>的组件扫描才会扫描到他，并创建一个<code>HomeController</code>实例作为<code>spring</code>上下文的<code>bean</code>,还有一些注解实现与它完全相同的功能，如<code>@Service</code>，<code>@Component</code>，<code>@Repository</code>，他们的效果完全相同，只不过<code>@Controller</code>更能描述这个类的角色。</p>
-<p><code>@GetMapping(&quot;/&quot;)</code>是指添加这个注解的方法相应针对<code>&quot;/&quot;</code>这个路径的<code>Http Get</code>请求，返回的字符串<code>&quot;home&quot;</code>实际上会被解析为视图的逻辑名，即位于<code>templates</code>目录下的<code>home.html</code>文件。</p>
-<p>视图中所用到的静态资源如图片等，是放在<code>static</code>目录下。</p>
-<p>测试控制器：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.api.Test;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</span><br><span class="line"><span class="keyword">import</span> tacos.controller.HomeController;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.containsString;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;</span><br><span class="line"></span><br><span class="line"><span class="meta">@WebMvcTest(HomeController.class)</span></span><br><span class="line"><span class="comment">//@RunWith(SpringRunner.class)    // 本来是没有的</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">TacoCloudApplicationTests</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MockMvc mockMvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">contextLoads</span><span class="params">()</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        mockMvc.perform(get(<span class="string">&quot;/&quot;</span>))</span><br><span class="line">                .andExpect(status().isOk())</span><br><span class="line">                .andExpect(view().name(<span class="string">&quot;home&quot;</span>))</span><br><span class="line">                .andExpect(content().string(containsString(<span class="string">&quot;Welcome to...&quot;</span>)));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>不需要<code>@RunWith</code>注解也可以，实际上默认是没有这个注解的。将默认的<code>@SpringBootTest</code>注解换成了<code>@WebMvcTest()</code>，其中接收的参数即为控制器类，它使得这个测试在Spring MVC应用的上下文运行，会让HomeController注入到Spring Mvc中，这样就能向它发起请求。注入了一个MockMvc，以实现测试。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Entity Framework框架使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-07 20:05:23" itemprop="dateCreated datePublished" datetime="2023-06-07T20:05:23+08:00">2023-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-10 10:03:07" itemprop="dateModified" datetime="2023-06-10T10:03:07+08:00">2023-06-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Entity-Framework-Core基础"><a href="#Entity-Framework-Core基础" class="headerlink" title="Entity Framework Core基础"></a>Entity Framework Core基础</h1><p>entity framework是微软官方的ORM框架，所谓ORM（object relational mapping，对象关系映射）中的对象即使C#中的对象，关系指的是关系数据库，如mysql，sqlserver等，映射是指在关系数据库与C#对象之间架起一座桥梁，让我们只需要操作C#对象就可以将数据插入数据库，而不需要sql语句。</p>
-<h2 id="Sqlite上使用EFCore"><a href="#Sqlite上使用EFCore" class="headerlink" title="Sqlite上使用EFCore"></a>Sqlite上使用EFCore</h2><h3 id="添加依赖："><a href="#添加依赖：" class="headerlink" title="添加依赖："></a>添加依赖：</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Install-Package</span> Microsoft.EntityFrameworkCore.Sqlite</span><br></pre></td></tr></table></figure>
-
-<h3 id="创建模型："><a href="#创建模型：" class="headerlink" title="创建模型："></a>创建模型：</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.EntityFrameworkCore;</span><br><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Collections.Generic;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BloggingContext</span> : <span class="title">DbContext</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> DbSet&lt;Blog&gt; Blogs &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> DbSet&lt;Post&gt; Posts &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> DbPath &#123; <span class="keyword">get</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">BloggingContext</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">var</span> folder = Environment.SpecialFolder.LocalApplicationData;</span><br><span class="line">        <span class="keyword">var</span> path = Environment.GetFolderPath(folder);</span><br><span class="line">        DbPath = System.IO.Path.Join(path, <span class="string">&quot;blogging.db&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// The following configures EF to create a Sqlite database file in the</span></span><br><span class="line">    <span class="comment">// special &quot;local&quot; folder for your platform.</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnConfiguring</span>(<span class="params">DbContextOptionsBuilder options</span>)</span></span><br><span class="line">        =&gt; options.UseSqlite(<span class="string">$&quot;Data Source=<span class="subst">&#123;DbPath&#125;</span>&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Blog</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> BlogId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Url &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> List&lt;Post&gt; Posts &#123; <span class="keyword">get</span>; &#125; = <span class="keyword">new</span>();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Post</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> PostId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Title &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">string</span> Content &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="built_in">int</span> BlogId &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="keyword">public</span> Blog Blog &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>实际上，连接字符串不应该硬编码进代码，而是从配置服务器或环境变量中读取。这里对应于Sqlite数据库的连接字符串即为<code>&quot;DataSource=blogging.db&quot;</code>。这里创建了两个对象，<code>Blog</code>和<code>Post</code>。其中声明了两个字段：<code>Blogs</code>和<code>Posts</code>，他们默认是生成的表的名称。</p>
-<p>在实现了DbContext的配置类中，</p>
-<h3 id="数据库迁移"><a href="#数据库迁移" class="headerlink" title="数据库迁移"></a>数据库迁移</h3><figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Install-Package</span> Microsoft.EntityFrameworkCore.Tools</span><br><span class="line"><span class="built_in">Add-Migration</span> InitialCreate</span><br><span class="line"><span class="built_in">Update-Database</span></span><br></pre></td></tr></table></figure>
-
-<p>数据库迁移需要Tooks工具，Add-Migration后面需要指定一个描述。之后才能够更新数据库。</p>
-<h3 id="创建、读取、更新和删除数据（CRUD）"><a href="#创建、读取、更新和删除数据（CRUD）" class="headerlink" title="创建、读取、更新和删除数据（CRUD）"></a>创建、读取、更新和删除数据（CRUD）</h3><figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> System;</span><br><span class="line"><span class="keyword">using</span> System.Linq;</span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">var</span> db = <span class="keyword">new</span> BloggingContext();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Note: This sample requires the database to be created before running.</span></span><br><span class="line">Console.WriteLine(<span class="string">$&quot;Database path: <span class="subst">&#123;db.DbPath&#125;</span>.&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Create</span></span><br><span class="line">Console.WriteLine(<span class="string">&quot;Inserting a new blog&quot;</span>);</span><br><span class="line">db.Add(<span class="keyword">new</span> Blog &#123; Url = <span class="string">&quot;http://blogs.msdn.com/adonet&quot;</span> &#125;);</span><br><span class="line">db.SaveChanges();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Read</span></span><br><span class="line">Console.WriteLine(<span class="string">&quot;Querying for a blog&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> blog = db.Blogs</span><br><span class="line">    .OrderBy(b =&gt; b.BlogId)</span><br><span class="line">    .First();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Update</span></span><br><span class="line">Console.WriteLine(<span class="string">&quot;Updating the blog and adding a post&quot;</span>);</span><br><span class="line">blog.Url = <span class="string">&quot;https://devblogs.microsoft.com/dotnet&quot;</span>;</span><br><span class="line">blog.Posts.Add(</span><br><span class="line">    <span class="keyword">new</span> Post &#123; Title = <span class="string">&quot;Hello World&quot;</span>, Content = <span class="string">&quot;I wrote an app using EF Core!&quot;</span> &#125;);</span><br><span class="line">db.SaveChanges();</span><br><span class="line"></span><br><span class="line"><span class="comment">// Delete</span></span><br><span class="line">Console.WriteLine(<span class="string">&quot;Delete the blog&quot;</span>);</span><br><span class="line">db.Remove(blog);</span><br><span class="line">db.SaveChanges();</span><br></pre></td></tr></table></figure>
-
-
-
-<p><code>new</code>一个上下文对象<code>db</code>，通过<code>db</code>来操作数据库。这里一个博客<code>Blog</code>可能包含多个<code>Post</code>，一个<code>Post</code>属于一个<code>Blog</code>。默认情况下<code>Post</code>会将<code>BlogId</code>作为其外键，但是<code>Blog</code>没有<code>PostId</code>作为外键。在向<code>Blog</code>的<code>Post</code>列表插入一个<code>Post</code>后，会将其保存在<code>Post</code>表中，删除<code>Blog</code>，对应的<code>Post</code>也会从表中删除。（从代码理解，删除一个Blog后，其中的list也没了，自然要将list删除，不可能有一个Blog属于另一个Post）,这里无法通过<code>Blog</code>获取到<code>Post</code>。</p>
-<h2 id="在类库（分层项目）中使用EFCore"><a href="#在类库（分层项目）中使用EFCore" class="headerlink" title="在类库（分层项目）中使用EFCore"></a>在类库（分层项目）中使用EFCore</h2><p>在Code First的情况下，先设计出对象，再迁移到数据库。当需要先在数据库中建立相应表时，需要使用实现了<code>IDesignTimeDbContextFactory&lt;T&gt;</code>的类，其中，T是上下文DbContext的实现类。在这个类中，有<code>CreateDbContext</code>方法，其中返回<code>MyDbContext</code>的实例，因此，在自己的<code>DbContext</code>实现类中需要有一个构造方法，如下：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">MyDbContext</span>(<span class="params">DbContextOptions&lt;MyDbContext&gt; options</span>) : <span class="title">base</span>(<span class="params">options</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>，在使用<code>mysql</code>数据库时，<code>IDesignTimeDbContextFactory&lt;T&gt;</code>的实现类如下：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">using</span> Microsoft.EntityFrameworkCore;</span><br><span class="line"><span class="keyword">using</span> Microsoft.EntityFrameworkCore.Design;</span><br><span class="line"><span class="keyword">using</span> System.Data.Common;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">MyDesignTimeDbContextFactory</span> : <span class="title">IDesignTimeDbContextFactory</span>&lt;<span class="title">MyDbContext</span>&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> MyDbContext <span class="title">CreateDbContext</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">    &#123;</span><br><span class="line">        DbContextOptionsBuilder&lt;MyDbContext&gt; builder = <span class="keyword">new</span>();</span><br><span class="line">        <span class="keyword">var</span> connectionString = <span class="string">&quot;server=localhost;user=root;password=123456;database=dotnet&quot;</span>;</span><br><span class="line">        <span class="keyword">var</span> serverVersion = <span class="keyword">new</span> MySqlServerVersion(<span class="keyword">new</span> Version(<span class="number">5</span>, <span class="number">7</span>, <span class="number">39</span>));</span><br><span class="line">        builder.UseMySql(connectionString,serverVersion);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> MyDbContext(builder.Options);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>其中需要传入<code>mysql</code>版本号和连接字符串，<code>builder.options</code>传入<code>MyDbContext</code>的基类构造方法</p>
-<p>对于Sqlite，<code>IDesignTimeDbContextFactory&lt;T&gt;</code>的实现类如下：</p>
-<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> MyDbContext <span class="title">CreateDbContext</span>(<span class="params"><span class="built_in">string</span>[] args</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    DbContextOptionsBuilder&lt;MyDbContext&gt; builder = <span class="keyword">new</span>();</span><br><span class="line">    builder.UseSqlite(<span class="string">&quot;Data Source=books.db&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> MyDbContext(builder.Options);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>这会在当前项目根目录创建一个<code>books.db</code>文件。</p>
-<p>要安装对应的<code>nuget</code>包：</p>
-<p><code>mysql</code>：</p>
-<p><img src="/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/image-20230608115439450.png" alt="image-20230608115439450"></p>
-<p><code>sqlite</code>：</p>
-<p><img src="/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/image-20230608115530635.png" alt="image-20230608115530635"></p>
-<p><strong>注意，这只在数据库设计时生效。</strong></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -672,6 +341,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E4%BB%8B%E7%BB%8D%EF%BC%9A"><span class="nav-number">1.</span> <span class="nav-text">事件介绍：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%AE%E6%A0%87"><span class="nav-number">2.</span> <span class="nav-text">目标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%E4%BA%8B%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">定义事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%8E%E4%BA%8B%E4%BB%B6%E8%AE%A2%E9%98%85%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%BF%94%E5%9B%9E%E5%80%BC"><span class="nav-number">4.</span> <span class="nav-text">从事件订阅服务器返回值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E5%8F%A6%E4%B8%80%E4%B8%AA%E4%BA%8B%E4%BB%B6%E5%A3%B0%E6%98%8E"><span class="nav-number">5.</span> <span class="nav-text">添加另一个事件声明</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9B%B4%E6%96%B0%E7%9A%84-NET-Core-%E4%BA%8B%E4%BB%B6%E6%A8%A1%E5%BC%8F"><span class="nav-number">6.</span> <span class="nav-text">更新的 .NET Core 事件模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E4%BA%8B%E4%BB%B6%E8%AE%A2%E9%98%85%E8%80%85"><span class="nav-number">7.</span> <span class="nav-text">异步事件订阅者</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8B%E4%BB%B6%E5%85%B7%E6%9C%89%E4%B8%93%E7%94%A8%E8%B0%83%E7%94%A8"><span class="nav-number">8.</span> <span class="nav-text">事件具有专用调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%B4%BE%E7%94%9F%E7%B1%BB%E4%B8%AD%E5%BC%95%E5%8F%91%E5%9F%BA%E7%B1%BB%E4%BA%8B%E4%BB%B6"><span class="nav-number">9.</span> <span class="nav-text">在派生类中引发基类事件</span></a></li></ol></div>
       </div>
       <!--/noindex-->
 
