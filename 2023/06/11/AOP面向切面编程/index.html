@@ -27,14 +27,14 @@
 <meta property="og:site_name" content="储藏库">
 <meta property="og:description" content="AOP面向切面AOP（Aspect Oriented Programming）思想实际上就是：在运行时，动态地将代码切入到类的指定方法、指定位置上。也就是说，我们可以使用AOP来帮助我们在方法执行前或执行之后，做一些额外的操作，实际上，它就是代理！ 通过AOP我们可以在保证原有业务不变的情况下，添加额外的动作，比如我们的某些方法执行完成之后，需要打印日志，那么这个时候，我们就可以使用AOP来帮助我">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/uopJ9KyqMvQSwi4.png">
+<meta property="og:image" content="http://example.com/2023/06/11/AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/uopJ9KyqMvQSwi4.png">
 <meta property="article:published_time" content="2023-06-11T02:50:48.000Z">
-<meta property="article:modified_time" content="2023-06-11T15:10:01.901Z">
+<meta property="article:modified_time" content="2023-06-12T07:50:40.312Z">
 <meta property="article:author" content="lycheewang">
 <meta property="article:tag" content="spring">
 <meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/uopJ9KyqMvQSwi4.png">
+<meta name="twitter:image" content="http://example.com/2023/06/11/AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/uopJ9KyqMvQSwi4.png">
 
 <link rel="canonical" href="http://example.com/2023/06/11/AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/">
 
@@ -176,10 +176,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-06-11 10:50:48 / 修改时间：23:10:01" itemprop="dateCreated datePublished" datetime="2023-06-11T10:50:48+08:00">2023-06-11</time>
+              <time title="创建时间：2023-06-11 10:50:48" itemprop="dateCreated datePublished" datetime="2023-06-11T10:50:48+08:00">2023-06-11</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-06-12 15:50:40" itemprop="dateModified" datetime="2023-06-12T15:50:40+08:00">2023-06-12</time>
+              </span>
 
           
 
@@ -250,7 +256,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;aop:config&gt;</span><br><span class="line">    &lt;aop:pointcut id=<span class="string">&quot;test&quot;</span> expression=<span class="string">&quot;execution(* org.example.entity.Student.study())&quot;</span>/&gt;</span><br><span class="line">    &lt;aop:aspect ref=<span class="string">&quot;studentAOP&quot;</span>&gt;</span><br><span class="line">                </span><br><span class="line">    &lt;/aop:aspect&gt;</span><br><span class="line">&lt;/aop:config&gt;</span><br></pre></td></tr></table></figure>
 
 <p>接着就是添加后续动作了，当然，官方支持的有多种多样的，比如执行前、执行后、抛出异常后、方法返回后等等：</p>
-<p><img src="/uopJ9KyqMvQSwi4.png" alt="image-20221216155201849"></p>
+<p><img src="/2023/06/11/AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/uopJ9KyqMvQSwi4.png" alt="image-20221216155201849"></p>
 <p>其中around方法为环绕方法，自定义度会更高</p>
 <figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">aop:aspect</span> <span class="attr">ref</span>=<span class="string">&quot;studentAOP&quot;</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!--     method就是我们的增强方法，pointcut-ref指向我们刚刚创建的切点     --&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">aop:after</span> <span class="attr">method</span>=<span class="string">&quot;afterStudy&quot;</span> <span class="attr">pointcut-ref</span>=<span class="string">&quot;test&quot;</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">aop:aspect</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
