@@ -20,30 +20,36 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="生似浮游">
-<meta property="og:type" content="website">
-<meta property="og:title" content="储藏库">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="AOP面向切面AOP（Aspect Oriented Programming）思想实际上就是：在运行时，动态地将代码切入到类的指定方法、指定位置上。也就是说，我们可以使用AOP来帮助我们在方法执行前或执行之后，做一些额外的操作，实际上，它就是代理！ 通过AOP我们可以在保证原有业务不变的情况下，添加额外的动作，比如我们的某些方法执行完成之后，需要打印日志，那么这个时候，我们就可以使用AOP来帮助我">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AOP面向切面编程">
+<meta property="og:url" content="http://example.com/2023/06/11/AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/index.html">
 <meta property="og:site_name" content="储藏库">
-<meta property="og:description" content="生似浮游">
+<meta property="og:description" content="AOP面向切面AOP（Aspect Oriented Programming）思想实际上就是：在运行时，动态地将代码切入到类的指定方法、指定位置上。也就是说，我们可以使用AOP来帮助我们在方法执行前或执行之后，做一些额外的操作，实际上，它就是代理！ 通过AOP我们可以在保证原有业务不变的情况下，添加额外的动作，比如我们的某些方法执行完成之后，需要打印日志，那么这个时候，我们就可以使用AOP来帮助我">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/uopJ9KyqMvQSwi4.png">
+<meta property="article:published_time" content="2023-06-11T02:50:48.000Z">
+<meta property="article:modified_time" content="2023-06-11T15:10:01.901Z">
 <meta property="article:author" content="lycheewang">
+<meta property="article:tag" content="spring">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/uopJ9KyqMvQSwi4.png">
 
-<link rel="canonical" href="http://example.com/">
+<link rel="canonical" href="http://example.com/2023/06/11/AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome : true,
-    isPost : false,
+    isHome : false,
+    isPost : true,
     lang   : 'zh-CN'
   };
 </script>
 
-  <title>储藏库</title>
+  <title>AOP面向切面编程 | 储藏库</title>
   
 
 
@@ -141,86 +147,10 @@
         <div class="content-wrap">
           
 
-          <div class="content index posts-expand">
+          <div class="content post posts-expand">
             
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/11/Java%E4%BB%A3%E7%90%86-%E5%86%85%E9%83%A8%E7%B1%BB-%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB-lamda%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/11/Java%E4%BB%A3%E7%90%86-%E5%86%85%E9%83%A8%E7%B1%BB-%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB-lamda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">Java接口-内部类-lamda表达式-函数式接口</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-11 11:31:12 / 修改时间：17:03:46" itemprop="dateCreated datePublished" datetime="2023-06-11T11:31:12+08:00">2023-06-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
 
     
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Java接口："><a href="#Java接口：" class="headerlink" title="Java接口："></a>Java接口：</h1><h2 id="Comparable-lt-T-gt-接口"><a href="#Comparable-lt-T-gt-接口" class="headerlink" title="Comparable&lt;T&gt;接口"></a><code>Comparable&lt;T&gt;</code>接口</h2><p><code>Array</code>类的<code>Sort</code>方法必须满足所属对象的类必须实现了<code>Comparable&lt;T&gt;</code>接口</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> Comparable&lt;T&gt;&#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">compareTo</span><span class="params">(T other)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>调用<code>x.compareTo(y)</code>时，<code>x</code>小于<code>y</code>，返回负数，相等返回<code>0</code>，<code>x</code>大于<code>y</code>返回正数。</p>
-<h2 id="Comparator接口"><a href="#Comparator接口" class="headerlink" title="Comparator接口"></a><code>Comparator</code>接口</h2><p><code>Array.sort</code>方法还可以接受两个参数：要比较的array和一个比较器对象，这个比较器对象实现<code>Comparator</code>接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="type">int</span> Comparator&lt;T&gt;&#123;</span><br><span class="line">    <span class="type">int</span> <span class="title function_">compare</span><span class="params">(T first, T second)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Cloneable接口"><a href="#Cloneable接口" class="headerlink" title="Cloneable接口"></a><code>Cloneable</code>接口</h2><p><code>Cloneable</code>接口实现对象的克隆。克隆涉及到对于对象成员的浅复制和深复制的问题，如果成员变量是不可变的，如String对象或<code>LocalTime</code>对象，那没有区别。如果对象是可变的，需要进行深复制，以免修改克隆后的成员变量会修改先前的对象的成员变量（引用指向同一个堆对象）。</p>
-<p>克隆的方法级别是<code>Protected</code>，意味着只有在对象内部的方法才能调用。不能直接对对象调用<code>clone</code>方法。为一个对象实现<code>clone</code>方法如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Employee</span> <span class="keyword">implements</span> <span class="title class_">Cloneable</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Date hireDay;</span><br><span class="line">    . . .</span><br><span class="line">    <span class="keyword">public</span> Employee clone <span class="keyword">throws</span> cloneNotSupportedException&#123;</span><br><span class="line">        <span class="comment">// 调用Object类的clone方法</span></span><br><span class="line">    	<span class="type">Employee</span> <span class="variable">cloned</span> <span class="operator">=</span> (Employee) <span class="built_in">super</span>.clone();</span><br><span class="line">        </span><br><span class="line">    	<span class="comment">// 将可变字段复制</span></span><br><span class="line">   	 	cloned.hireDay = (Date) hireDay.clone();</span><br><span class="line">    	<span class="keyword">return</span> cloned;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>会抛出一个异常，如果在一个没有实现cloneable接口的对象上调用clone。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/11/Java%E4%BB%A3%E7%90%86-%E5%86%85%E9%83%A8%E7%B1%BB-%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB-lamda%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
@@ -236,10 +166,9 @@
       <meta itemprop="name" content="储藏库">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/11/AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/" class="post-title-link" itemprop="url">AOP面向切面编程</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          AOP面向切面编程
+        </h1>
 
         <div class="post-meta">
             <span class="post-meta-item">
@@ -263,7 +192,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h1 id="AOP面向切面"><a href="#AOP面向切面" class="headerlink" title="AOP面向切面"></a>AOP面向切面</h1><p>AOP（Aspect Oriented Programming）思想实际上就是：在运行时，动态地将代码切入到类的指定方法、指定位置上。也就是说，我们可以使用AOP来帮助我们在方法执行前或执行之后，做一些额外的操作，实际上，它就是代理！</p>
+        <h1 id="AOP面向切面"><a href="#AOP面向切面" class="headerlink" title="AOP面向切面"></a>AOP面向切面</h1><p>AOP（Aspect Oriented Programming）思想实际上就是：在运行时，动态地将代码切入到类的指定方法、指定位置上。也就是说，我们可以使用AOP来帮助我们在方法执行前或执行之后，做一些额外的操作，实际上，它就是代理！</p>
 <p>通过AOP我们可以在保证原有业务不变的情况下，添加额外的动作，比如我们的某些方法执行完成之后，需要打印日志，那么这个时候，我们就可以使用AOP来帮助我们完成，它可以批量地为这些方法添加动作。可以说，它相当于将我们原有的方法，在不改变源代码的基础上进行了增强处理。</p>
 <p>相当于我们的整个业务流程，被直接斩断，并在断掉的位置添加了一个额外的操作，再连接起来，也就是在一个切点位置插入内容。它的原理实际上就是通过动态代理机制实现的。Spring底层并不是使用的JDK提供的动态代理，而是使用的第三方库实现，它能够以父类的形式代理，而不仅仅是接口。</p>
 <h3 id="使用配置实现AOP"><a href="#使用配置实现AOP" class="headerlink" title="使用配置实现AOP"></a>使用配置实现AOP</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">beans</span> <span class="attr">xmlns</span>=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:xsi</span>=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xmlns:aop</span>=<span class="string">&quot;http://www.springframework.org/schema/aop&quot;</span></span></span><br><span class="line"><span class="tag">       <span class="attr">xsi:schemaLocation</span>=<span class="string">&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd</span></span></span><br><span class="line"><span class="string"><span class="tag">       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">beans</span>&gt;</span></span><br></pre></td></tr></table></figure>
@@ -411,582 +340,37 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Around(&quot;execution(* com.test.bean.Student.test(..))&quot;)</span></span><br><span class="line"><span class="keyword">public</span> Object <span class="title function_">around</span><span class="params">(ProceedingJoinPoint point)</span> <span class="keyword">throws</span> Throwable &#123;</span><br><span class="line">    System.out.println(<span class="string">&quot;方法执行之前！&quot;</span>);</span><br><span class="line">    <span class="type">Object</span> <span class="variable">val</span> <span class="operator">=</span> point.proceed();</span><br><span class="line">    System.out.println(<span class="string">&quot;方法执行之后！&quot;</span>);</span><br><span class="line">    <span class="keyword">return</span> val;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
-      
     </div>
 
     
     
     
+
       <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
+          <div class="post-tags">
+              <a href="/tags/spring/" rel="tag"># spring</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/11/springEl%E8%A1%A8%E8%BE%BE%E5%BC%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/11/springEl%E8%A1%A8%E8%BE%BE%E5%BC%8F/" class="post-title-link" itemprop="url">springEl表达式</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-11 10:08:40 / 修改时间：10:44:24" itemprop="dateCreated datePublished" datetime="2023-06-11T10:08:40+08:00">2023-06-11</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="SpringEl表达式"><a href="#SpringEl表达式" class="headerlink" title="SpringEl表达式"></a>SpringEl表达式</h1><p>SpEL 是一种强大，简洁的装配 Bean 的方式，它可以通过运行期间执行的表达式将值装配到我们的属性或构造函数当中，更可以调用 JDK 中提供的静态常量，获取外部 Properties 文件中的的配置。</p>
-<h2 id="外部属性注入"><a href="#外部属性注入" class="headerlink" title="外部属性注入"></a>外部属性注入</h2><p>在resource文件夹下面创建以.property结尾的文件，里面的内容是键值对：</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">test.name=test</span></span><br></pre></td></tr></table></figure>
-
-<p>这样，Key就是<code>test.name</code>，Value就是<code>test</code>，我们可以通过一个注解直接读取到外部配置文件中对应的属性值，首先我们需要引入这个配置文件，我们可以在配置类上添加<code>@PropertySource</code>注解：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/11/springEl%E8%A1%A8%E8%BE%BE%E5%BC%8F/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
-    </div>
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/spring%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/spring%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/" class="post-title-link" itemprop="url">spring高级特性</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-10 17:08:51 / 修改时间：17:37:17" itemprop="dateCreated datePublished" datetime="2023-06-10T17:08:51+08:00">2023-06-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="spring高级部分"><a href="#spring高级部分" class="headerlink" title="spring高级部分"></a>spring高级部分</h1><h2 id="Bean-Aware接口"><a href="#Bean-Aware接口" class="headerlink" title="Bean Aware接口"></a>Bean Aware接口</h2><p>实现了BeanAware接口的类注册成bean并初始化后，可以得到一些资源。实现此接口的类会获得某些感知能力，Spring容器会在Bean被加载时，根据类实现的感知接口，会调用类中实现的对应感知方法。</p>
-<p>如BeanNameAware接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">BeanNameAware</span> &#123;   <span class="comment">//我们只需要实现这个接口就可以了</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBeanName</span><span class="params">(String name)</span> &#123;   <span class="comment">//Bean在加载的时候，容器就会自动调用此方法，将Bean的名称给到我们</span></span><br><span class="line">        System.out.println(<span class="string">&quot;我在加载阶段获得了Bean名字：&quot;</span>+name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>BeanClassLoaderAware接口：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">BeanClassLoaderAware</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setBeanClassLoader</span><span class="params">(ClassLoader classLoader)</span> &#123;</span><br><span class="line">        System.out.println(classLoader);	<span class="comment">//可以在Bean创建的时候拿到Bean的类加载器</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>我们可以通过实现Bean Aware接口，来得到相应资源。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/10/spring%E9%AB%98%E7%BA%A7%E7%89%B9%E6%80%A7/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
         
-      
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/11/springEl%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="prev" title="springEl表达式">
+      <i class="fa fa-chevron-left"></i> springEl表达式
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/06/11/Java%E4%BB%A3%E7%90%86-%E5%86%85%E9%83%A8%E7%B1%BB-%E5%8C%BF%E5%90%8D%E5%86%85%E9%83%A8%E7%B1%BB-lamda%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="next" title="Java接口-内部类-lamda表达式-函数式接口">
+      Java接口-内部类-lamda表达式-函数式接口 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
       </footer>
+    
   </article>
   
   
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/spring/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/spring/" class="post-title-link" itemprop="url">spring</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-10 10:38:41 / 修改时间：16:35:45" itemprop="dateCreated datePublished" datetime="2023-06-10T10:38:41+08:00">2023-06-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Spring基础"><a href="#Spring基础" class="headerlink" title="Spring基础"></a><code>Spring</code>基础</h1><p><code>Spring</code>框架是为了简化开发，是轻量级**<code>IoC</code>（控制反转）<strong>和</strong><code>AOP</code>（面向切面编程）**框架。是针对<code>Bean</code>的生命周期进行管理的轻量级容器。类似C#里的依赖注入框架。</p>
-<p><code>IoC</code>将复杂的系统分解为相互合作的对象，通过对对象类进行封装后，内部实现对外界是透明的，从而降低了问题的复杂度，可以灵活进行重用和扩展。见下列代码：</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/10/spring/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/C-%E4%BA%8B%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/C-%E4%BA%8B%E4%BB%B6/" class="post-title-link" itemprop="url">C#事件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-10 10:10:08 / 修改时间：10:19:47" itemprop="dateCreated datePublished" datetime="2023-06-10T10:10:08+08:00">2023-06-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="事件介绍："><a href="#事件介绍：" class="headerlink" title="事件介绍："></a>事件介绍：</h2><p>基于委托实现，是对象用于向系统中所有相关组件广播消息的方式。其他任何组件都可以向<strong>事件源订阅事件</strong>，并在事件引发时得到通知。</p>
-<p>可以定义应针对<strong>类引发的事件</strong>。 使用事件时，需要注意的一点是特定事件可能没有任何注册的对象。 <strong>必须编写代码，以确保在未配置侦听器时不会引发事件。</strong></p>
-<p>通过订阅事件，还可在两个对象（事件源和事件接收器）之间创建耦合。 需要确保当不再对事件感兴趣时，事件接收器将从事件源取消订阅。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/10/C-%E4%BA%8B%E4%BB%B6/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/C-%E6%B3%9B%E5%9E%8B/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/C-%E6%B3%9B%E5%9E%8B/" class="post-title-link" itemprop="url">C#泛型</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-10 10:09:55 / 修改时间：10:19:37" itemprop="dateCreated datePublished" datetime="2023-06-10T10:09:55+08:00">2023-06-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="泛型类型描述"><a href="#泛型类型描述" class="headerlink" title="泛型类型描述"></a>泛型类型描述</h2><p>使用描述性名称命名泛型类型参数，除非单个字母名称完全具有自我说明性且描述性名称不会增加任何作用。</p>
-<p>对具有单个字母类型参数的类型，考虑使用 T 作为类型参数名称。</p>
-<p>在类型参数描述性名称前添加前缀 “T”。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/10/C-%E6%B3%9B%E5%9E%8B/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/C-%E5%8F%8D%E5%B0%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/C-%E5%8F%8D%E5%B0%84/" class="post-title-link" itemprop="url">C#反射</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-10 10:09:39 / 修改时间：10:19:23" itemprop="dateCreated datePublished" datetime="2023-06-10T10:09:39+08:00">2023-06-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="反射介绍"><a href="#反射介绍" class="headerlink" title="反射介绍"></a>反射介绍</h2><p>反射是操作dll文件的一个类库，使用反射通常包含以下两个过程</p>
-<p>1.找到dll文件 </p>
-<p>2.通过反射类库里面的各种方法操作dll文件  </p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/10/C-%E5%8F%8D%E5%B0%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/10/%E5%9F%BA%E6%9C%ACspringboot%E7%BB%93%E6%9E%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/10/%E5%9F%BA%E6%9C%ACspringboot%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">基本springboot结构</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-06-10 09:59:44 / 修改时间：10:20:17" itemprop="dateCreated datePublished" datetime="2023-06-10T09:59:44+08:00">2023-06-10</time>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="基本springboot结构"><a href="#基本springboot结构" class="headerlink" title="基本springboot结构"></a>基本<code>springboot</code>结构</h1><p><code>SpringBoot</code>引导类的内容如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> tacos;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TacoCloudApplication</span> &#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        SpringApplication.run(TacoCloudApplication.class, args);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>在主类中<code>@SpringBootApplication</code>注解表明这是一个<code>SpringBoot</code>应用。其是三个注解的组合：</p>
-<ul>
-<li><code>@SpringBootConfiguration</code>:声明该类为配置类，是<code>@Configuration</code>的特殊形式。</li>
-<li><code>@EnableAutoConfiguration</code>:启用Spring Boot自动配置，告诉<code>Spring Boot</code>自动配置他认为我们应该用到的组件。</li>
-<li><code>@ComponentScan</code>:启动组件扫描，这样当我们用<code>@Controller</code>,<code>@Service</code>和<code>@Component</code>注解声明其他类时，<code>Spring Boot</code>会自动发现他们并将其注册为<code>Spring</code>应用上下文组件。</li>
-</ul>
-<p><code>main</code>方法是模板方法，在所有的<code>SpringBoot</code>项目中都几乎会有一样的内容，其中调用<code>SpringApplication</code>的静态方法<code>run()</code>，其具有两个参数，第一个是配置类，这里是传入引导类，但不一定要传入引导类，但这是最常用和便捷的方法。其次是命令行参数。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/10/%E5%9F%BA%E6%9C%ACspringboot%E7%BB%93%E6%9E%84/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="lycheewang">
-      <meta itemprop="description" content="生似浮游">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="储藏库">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">Entity Framework框架使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-06-07 20:05:23" itemprop="dateCreated datePublished" datetime="2023-06-07T20:05:23+08:00">2023-06-07</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-06-10 10:20:03" itemprop="dateModified" datetime="2023-06-10T10:20:03+08:00">2023-06-10</time>
-              </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="Entity-Framework-Core基础"><a href="#Entity-Framework-Core基础" class="headerlink" title="Entity Framework Core基础"></a>Entity Framework Core基础</h1><p>entity framework是微软官方的ORM框架，所谓ORM（object relational mapping，对象关系映射）中的对象即使C#中的对象，关系指的是关系数据库，如mysql，sqlserver等，映射是指在关系数据库与C#对象之间架起一座桥梁，让我们只需要操作C#对象就可以将数据插入数据库，而不需要sql语句。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2023/06/07/Entity-Framework%E6%A1%86%E6%9E%B6%E4%BD%BF%E7%94%A8/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-
   
 
 
@@ -1039,6 +423,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2"><span class="nav-number">1.</span> <span class="nav-text">AOP面向切面</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E9%85%8D%E7%BD%AE%E5%AE%9E%E7%8E%B0AOP"><span class="nav-number">1.0.1.</span> <span class="nav-text">使用配置实现AOP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%8E%A5%E5%8F%A3%E5%AE%9E%E7%8E%B0AOP"><span class="nav-number">1.0.2.</span> <span class="nav-text">使用接口实现AOP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E6%B3%A8%E8%A7%A3%E5%AE%9E%E7%8E%B0AOP"><span class="nav-number">1.0.3.</span> <span class="nav-text">使用注解实现AOP</span></a></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
