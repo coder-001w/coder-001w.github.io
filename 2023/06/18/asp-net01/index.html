@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="ASP.NET 介绍 一个典型的ASP. NET Core应用程序由几个层组成。ASP.NET Core框架代码处理来自客户端的请求，处理复杂的网络代码。然后框架调用处理程序（例如，Razor Pages和Web API控制器），您使用框架提供的原语编写。最后，这些处理程序调用应用程序的域逻辑，这些域逻辑通常是c#类和对象，没有任何ASP. NET Core特定的依赖。 ASP. NET Core">
+<meta property="og:type" content="article">
+<meta property="og:title" content="asp.net01">
+<meta property="og:url" content="http://example.com/2023/06/18/asp-net01/index.html">
+<meta property="og:site_name" content="储藏库">
+<meta property="og:description" content="ASP.NET 介绍 一个典型的ASP. NET Core应用程序由几个层组成。ASP.NET Core框架代码处理来自客户端的请求，处理复杂的网络代码。然后框架调用处理程序（例如，Razor Pages和Web API控制器），您使用框架提供的原语编写。最后，这些处理程序调用应用程序的域逻辑，这些域逻辑通常是c#类和对象，没有任何ASP. NET Core特定的依赖。 ASP. NET Core">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://example.com/image-20230618095533242.png">
+<meta property="og:image" content="http://example.com/image-20230618100644060.png">
+<meta property="og:image" content="http://example.com/image-20230618110433820.png">
+<meta property="og:image" content="http://example.com/image-20230618110827843.png">
+<meta property="og:image" content="http://example.com/image-20230618111048953.png">
+<meta property="og:image" content="http://example.com/image-20230618111543293.png">
+<meta property="og:image" content="http://example.com/image-20230618111856620.png">
+<meta property="article:published_time" content="2023-06-18T01:51:25.000Z">
+<meta property="article:modified_time" content="2023-06-18T03:40:14.000Z">
+<meta property="article:author" content="lycheewang">
+<meta property="article:tag" content="asp.net">
+<meta property="article:tag" content=".net">
+<meta property="article:tag" content="c#">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/image-20230618095533242.png">
+
+<link rel="canonical" href="http://example.com/2023/06/18/asp-net01/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>asp.net01 | 储藏库</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">储藏库</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/06/18/asp-net01/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lycheewang">
+      <meta itemprop="description" content="生似浮游">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="储藏库">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          asp.net01
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-06-18 09:51:25 / 修改时间：11:40:14" itemprop="dateCreated datePublished" datetime="2023-06-18T09:51:25+08:00">2023-06-18</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="ASP-NET-介绍"><a href="#ASP-NET-介绍" class="headerlink" title="ASP.NET 介绍"></a>ASP.NET 介绍</h1><p><img src="/image-20230618095533242.png" alt="image-20230618095533242"></p>
+<p>一个典型的ASP. NET Core应用程序由几个层组成。ASP.NET Core框架代码处理来自客户端的请求，处理复杂的网络代码。然后框架调用处理程序（例如，Razor Pages和Web API控制器），您使用框架提供的原语编写。最后，这些处理程序调用应用程序的域逻辑，这些域逻辑通常是c#类和对象，没有任何ASP. NET Core特定的依赖。</p>
+<p>ASP. NET Core提供了一个通用的web框架，可以用来构建各种各样的应用程序。ASP. NET Core包括支持许多不同范例的api：</p>
+<ul>
+<li><code>Minimal APIs</code>：可以被移动应用程序或基于浏览器的单页应用程序使用的简单HTTP api。</li>
+<li><code>Web APIs</code>：一种构建HTTP api的替代方法，与Minimal api相比，它增加了额外的结构和特性。</li>
+<li><code>gRPC APIs</code>：用于构建高效的二进制api，用于使用gRPC协议的服务器到服务器通信。</li>
+<li>Razor Pages：用于构建基于页面的服务器呈现应用程序。</li>
+<li><code>MVC Controllers</code>：与Razor Pages类似，MVC控制器应用程序适用于基于服务器的应用程序，但没有基于页面的范例。</li>
+<li><code>Blazor WebAssembly</code>：使用WebAssembly标准的基于浏览器的单页应用程序框架，类似于JavaScript框架，如Angular、React或Vue。</li>
+<li><code>Blazor Server</code>：用于构建有状态的应用程序，在服务器上呈现，通过WebSockets发送UI事件和页面更新，以提供客户端单页面应用程序的感觉，但具有与服务器呈现应用程序的轻松开发特性。</li>
+</ul>
+<p>HTTP Web 工作流程：</p>
+<img src="/image-20230618100644060.png" alt="image-20230618100644060" style="zoom:50%;" />
+
+<p>用户首先请求一个网页，这导致一个HTTP请求被发送到服务器。服务器解释请求，生成必要的HTML，并将其以HTTP响应的形式发送回来。浏览器就可以显示网页了。</p>
+<p>asp.net core 处理请求示意图：</p>
+<p><img src="/image-20230618110433820.png" alt="image-20230618110433820"></p>
+<p>请求通过网络被asp.net core 应用程序接收。ASP. NET Core应用程序有一个内置的web服务器，默认情况下是<code>Kestrel</code>，它负责接收原始请求并构造数据的内部表示，即<code>HttpContext对象</code>，该对象可以被应用程序的其余部分使用。</p>
+<p>您的应用程序可以使用存储在HttpContext中的详细信息来生成对请求的适当响应，这可能是生成一些HTML，返回“访问被拒绝”消息，或发送电子邮件，所有这些都取决于您的应用程序的需求。</p>
+<p>一旦应用程序完成了对请求的处理，它将把响应返回给web服务器。ASP. NET Core web服务器会将该表示转换为原始HTTP响应并将其发送到网络，网络会将其转发到用户的浏览器。</p>
+<p><img src="/image-20230618110827843.png" alt="image-20230618110827843"></p>
+<p>asp.net core 应用模型。</p>
+<p><img src="/image-20230618111048953.png" alt="image-20230618111048953"></p>
+<p>使用反向代理的应用。反向代理使得应用更安全，利于负载均衡和拓展。</p>
+<p>每个请求都传递给中间件管道，中间件管道可能会对其进行修改，然后将其传递给管道末端的端点中间件以生成响应。响应通过中间件返回到服务器，最后发送到浏览器。</p>
+<p>HttpContext是由ASP. NET core web服务器构造的。它被应用程序用作单个请求的存储箱。任何特定于此特定请求和后续响应的内容都可以与其关联并存储在其中。这可能包括请求的属性、特定于请求的服务、已加载的数据或已发生的错误。web服务器用原始HTTP请求的细节和其他配置细节填充初始HttpContext，并将其传递给应用程序的其余部分。</p>
+<h2 id="HTTP协议"><a href="#HTTP协议" class="headerlink" title="HTTP协议"></a>HTTP协议</h2><p>请求-响应是两台计算机相互通信的基本方式。第一计算机向第二计算机发送请求，第二计算机响应该请求。在客户机-服务器计算模型中，请求者(客户机)总是发起与响应者(服务器)的对话。顾名思义，服务器向客户机提供服务。在HTTP中，客户端也称为用户代理，通常是web浏览器。该服务器通常被称为web服务器。</p>
+<p>HTTP是一种无状态协议。<strong>从客户机到服务器的每个请求都会返回一个从服务器到客户机的响应，这就是协议记住的全部内容。对同一服务器的后续请求完全不知道之前发生了什么。</strong>相比之下，面向连接的协议，如FTP或Telnet(也包括请求-响应和客户机-服务器)在客户机和服务器之间创建持久通道。话虽如此，HTTP 1.1确实持久化连接以提高性能。</p>
+<p>HTTP以纯文本形式发送和接收与协议相关的数据(而不是以二进制形式发送和接收)，这与许多其他与互联网相关的协议一样。这样做的基本原理是允许您在没有专门协议分析器的情况下查看通信情况，从而使故障排除更加容易。</p>
+<p>HTTP最初被设计为只交付HTML，而HTTP 0.9只有一种方法:GET。后来的版本将其扩展为分布式协作系统(包括web应用程序)的通用协议。</p>
+<p>web应用程序起源于通过HTTP向用户交付定制的动态内容。</p>
+<h3 id="HTTP-Request"><a href="#HTTP-Request" class="headerlink" title="HTTP Request"></a>HTTP Request</h3><p>HTTP是一个请求-响应协议，所以一切都从请求开始。HTTP请求，像任何HTTP消息一样，由以下顺序的几行文本组成:</p>
+<ol>
+<li><p>请求行</p>
+</li>
+<li><p>零个或多个请求头</p>
+</li>
+<li><p>空行</p>
+</li>
+<li><p>消息主体(可选)</p>
+</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">GET /Protocols/rfc2616/rfc2616.html HTTP/1.1	(请求行)</span><br><span class="line">Host: www.w3.org								(请求头)</span><br><span class="line">User-Agent: Mozilla/5.0							(请求头)</span><br><span class="line">(empty line)									(空行)</span><br></pre></td></tr></table></figure>
+
+<p>以上就是一个请求头示例，其中没有消息主体。</p>
+<p>请求行中的第一个字是请求方法，后面是统一资源标识符(Uniform Resource Identifier, URI)和要使用的HTTP版本。接下来的两行是请求头。注意，最后一行是空行，即使没有消息体也必须存在。<strong>消息体是否存在取决于请求方法。</strong></p>
+<p>HTTP 1.1指定必须始终实现GET和HEAD，而所有其他方法都是可选的(这意味着即使POST也是可选的)。</p>
+<ul>
+<li>GET ：告诉服务器返回指定的资源。</li>
+<li>HEAD ：与GET相同，只是服务器不能返回消息体。此方法通常用于获取响应头，而无需在网络上承载消息体的其余部分。</li>
+<li>POST ：告诉服务器消息体中的数据应该传递到由URI标识的资源。服务器如何处理消息体取决于服务器。</li>
+<li>PUT ：告诉服务器消息体中的数据应该是给定URI上的资源。如果URI标识的资源中已经存在数据，则替换该数据。否则，将在URI所在的位置创建一个新资源。</li>
+<li>DELETE ：告诉服务器删除由URI标识的资源。</li>
+<li>TRACE ：告诉服务器返回请求。这样，客户机就可以看到中间服务器对请求做了什么。</li>
+<li>OPTIONS ：告诉服务器返回服务器支持的HTTP方法列表。</li>
+<li>CONNECT ：告诉服务器与客户端建立网络连接。此方法主要用于设置SSL隧道(以启用HTTPS)。</li>
+<li>PATCH ：告诉服务器消息体中的数据修改了由URI标识的资源。</li>
+</ul>
+<p>如果一个方法不改变服务器的状态，即服务器只提供信息而不提供其他任何东西，那么它就被认为是安全的。GET、HEAD、OPTIONS和TRACE都是安全的方法，因为它们不会改变服务器上的任何东西。相比之下，POST、PUT和DELETE方法会改变服务器的状态;例如，在发送POST请求之后，服务器上的数据应该被更改。</p>
+<p>如果服务器的状态在使用相同的数据第二次调用该方法时没有改变，则认为该方法是幂等的。根据定义，安全方法也被认为是幂等的</p>
+<p>PUT和DELETE是幂等的，但不安全。这是因为PUT和DELETE在第二次调用时不会改变服务器的状态。对相同的资源进行PUT将导致服务器采取相同的操作，因为在第一个请求之后，URI上的资源已经更新或创建。对相同的资源进行DELETE可能会导致服务器出错，但状态不会改变。</p>
+<p>POST既不是安全的方法，也不是幂等的方法，因为对服务器的后续POST请求可能(也可能不会)导致状态更改，这取决于服务器。</p>
+<p>GET是最基本的HTTP方法，所有浏览器都支持它，因为它是您实际从服务器获取内容的方式。POST支持始于HTML 2.0，并添加了HTML表单。HTML表单标记有一个属性方法，它接受值get或post，指示您想要使用哪个HTTP方法。</p>
+<p>除了GET和POST之外，HTML不支持任何其他HTTP方法。</p>
+<p>不过，现代浏览器的功能不仅仅是<code>HTML</code>。要支持<code>PUT</code>和<code>DELETE</code>，可以使用<code>XMLHttpRequest (XHR)</code>。<code>XHR</code>是一组浏览器<code>api</code>(实际上，它主要是一个称为<code>XMLHttpRequest</code>的浏览器对象)，<code>JavaScript</code>代码通常包裹在它周围。<code>XHR</code>允许程序员向服务器发送<code>HTTP</code>请求，尽管它的名字是<code>XHR</code>，但它并不局限于只使用<code>XML</code>。请求和响应可以以任何格式发送，包括<code>JSON</code>和文本文件。</p>
+<p>尽管<code>HTTP</code>请求方法定义了调用客户机请求的操作，但是关于请求或客户机的其他信息通常放在<code>HTTP</code>请求头中。请求标头是以纯文本形式的以冒号分隔的名称-值对，以回车(<code>CR</code>)和换行(<code>LF</code>)结束。</p>
+<p><code>HTTP</code>请求头大多是可选的。在<code>HTTP 1.1</code>中唯一必需的报头是<code>Host</code>报头字段。但是，如果消息有消息体(这是可选的，取决于方法)，则需要有<code>Content-Length</code>或<code>Transfer-Encoding</code>报头字段。</p>
+<table>
+<thead>
+<tr>
+<th>Header field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Accept</td>
+<td>作为HTTP响应的一部分，客户端可以接受的内容类型。例如，Accept: text&#x2F;html向服务器发出信号，表示客户端希望响应体的内容类型为html。</td>
+</tr>
+<tr>
+<td>Accept-Charset</td>
+<td>服务器要求的字符集。例如，Accept-Charset: utf-8告诉服务器客户端希望响应体采用utf-8格式。</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>用于发送基本身份验证</td>
+</tr>
+<tr>
+<td>Cookie</td>
+<td>客户端应该发送回由调用服务器设置的cookie。如果服务器之前在浏览器上设置了三个Cookie, Cookie报头字段将在分号分隔的名称-值对字符串中包含所有三个Cookie。Cookie: my_first_cookie&#x3D;hello; my_second_cookie&#x3D;world</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>请求主体的长度，以8字节为单位。</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>请求体的内容类型(当有请求体时)。当发送POST或PUT请求时，默认的内容类型是x-www-form-urlencoded。但是当上传文件时(使用HTML输入标记将type属性设置为file或其他方式)，内容类型应该是multipart&#x2F;form-data。</td>
+</tr>
+<tr>
+<td>Host</td>
+<td>服务器的名称和端口号。如果不输入端口号，将解析为80端口号。</td>
+</tr>
+<tr>
+<td>Referrer</td>
+<td>链接到所请求页面的前一个页面的地址。</td>
+</tr>
+<tr>
+<td>User-Agent</td>
+<td>描述调用客户端。</td>
+</tr>
+</tbody></table>
+<h3 id="HTTP-Response"><a href="#HTTP-Response" class="headerlink" title="HTTP Response"></a>HTTP Response</h3><p>每次有请求时都会发送HTTP响应消息。与HTTP请求一样，HTTP响应由几行纯文本组成:</p>
+<ul>
+<li>状态行</li>
+<li>零个或多个响应头</li>
+<li>空行</li>
+<li>消息主体(可选)</li>
+</ul>
+<p>HTTP响应的结构与HTTP请求相同。这是一个典型的HTTP响应的样子：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">200 OK</span><br><span class="line">Date: Sat, 22 Nov 2014 12:58:58 GMT</span><br><span class="line">Server: Apache/2</span><br><span class="line">  Last-Modified: Thu, 28 Aug 2014 21:01:33 GMT</span><br><span class="line">Content-Length: 33115</span><br><span class="line">Content-Type: text/html; charset=iso-8859-1</span><br><span class="line"></span><br><span class="line">&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Strict//EN&quot; &quot;http://www.w3.org/</span><br><span class="line">     TR/xhtml1/DTD/xhtml1-strict.dtd&quot;&gt; &lt;html xmlns=&#x27;http://www.w3.org/1999/</span><br><span class="line">     xhtml&#x27;&gt; &lt;head&gt;&lt;title&gt;Hypertext Transfer Protocol -- HTTP/1.1&lt;/title&gt;&lt;/</span><br><span class="line">     head&gt;&lt;body&gt;...&lt;/body&gt;&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+
+<p>HTTP响应中的状态码表示它是什么类型的响应。根据代码的第一个数字，有五类HTTP响应状态代码</p>
+<table>
+<thead>
+<tr>
+<th>Status code class</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1XX</td>
+<td>Informational.这告诉客户端服务器已经接收到请求并正在处理它。</td>
+</tr>
+<tr>
+<td>2XX</td>
+<td>Success. 这是客户想要的;服务器已经接收到请求并成功地处理了它。通常是200。</td>
+</tr>
+<tr>
+<td>3XX</td>
+<td>Redirection. 这告诉客户端请求已被接收和处理，但客户端需要做更多的工作来完成操作。这个类中的大多数状态码用于URL重定向。</td>
+</tr>
+<tr>
+<td>4XX</td>
+<td>Client Error. 这告诉客户端请求有问题。该类中最广为人知的状态是404 Not Found，服务器告诉客户端它试图获取的资源在该URL上找不到。</td>
+</tr>
+<tr>
+<td>5XX</td>
+<td>Server Error. 这告诉客户端请求有问题，但这是服务器的错误。这个类中的通用状态码是500内部服务器错误。</td>
+</tr>
+</tbody></table>
+<p>响应报头与请求报头类似。它们都是纯文本中以冒号分隔的名称-值对，以CR和LF结束。就像请求头告诉服务器更多关于请求和客户端想要什么一样，响应头是服务器告诉客户端更多关于响应和服务器想要(从客户端)什么的方法。</p>
+<table>
+<thead>
+<tr>
+<th>Header field</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Allow</td>
+<td>告诉客户端服务器支持哪些请求方法。</td>
+</tr>
+<tr>
+<td>Content-Length</td>
+<td>响应体的长度，以八字节为单位(8位字节)。</td>
+</tr>
+<tr>
+<td>Content-Type</td>
+<td>响应体的内容类型(当有响应体时)。</td>
+</tr>
+<tr>
+<td>Date</td>
+<td>告诉当前时间(格式为GMT)</td>
+</tr>
+<tr>
+<td>Location</td>
+<td>这个头与重定向一起使用，告诉客户端在哪里请求下一个URL。</td>
+</tr>
+<tr>
+<td>Server</td>
+<td>返回响应的服务器的域名。</td>
+</tr>
+<tr>
+<td>Set-Cookie</td>
+<td>在客户端设置一个cookie。多个Set-Cookie报头可以添加到同一个响应中。</td>
+</tr>
+<tr>
+<td>WWW-Authenticate</td>
+<td>告诉报头客户端应在其授权请求报头中提供何种类型的授权。服务器通常将此消息与401未授权状态行一起发送。这个报头还提供了被服务器接受的身份验证方案的挑战信息(例如，RFC 2617中描述的基本和摘要访问身份验证方案)。</td>
+</tr>
+</tbody></table>
+<h3 id="URI"><a href="#URI" class="headerlink" title="URI"></a>URI</h3><p>这是URI的一般形式： <code>&lt;scheme name&gt; : &lt;hierarchical part&gt; [ ? &lt;query&gt; ] [ # &lt;fragment&gt; ]</code></p>
+<p><code>scheme name</code>是定义URI结构其余部分的URI方案的名称。由于URI是标识资源的常用方法，因此使用了大量的URI scheme。但我们在本书中主要使用的是HTTP scheme。</p>
+<p><code>hierarchical part</code>包含识别信息，在结构上应该是层次的。如果层次结构部分以双斜杠(&#x2F;&#x2F;)开头，那么它将包含以@结尾的可选用户信息，后面跟着层次结构路径。否则，它就是路径。路径是由正斜杠(&#x2F;)分隔的段序列。</p>
+<p>只有<code>scheme name</code>和<code>hierarchical part</code>部分是必需的。<code>query</code>以问号(?)开头，它是可选的，并且包含本质上没有层次结构的其他信息。查询通常组织为键-值对序列，由&amp;分隔。</p>
+<p>另一个可选部分是<code>fragment</code>，它是辅助资源的标识符，是所定义的URI的一部分。<code>fragment</code>从#之后开始。如果URI有查询，则片段将跟随查询。<code>fragment</code>意味着由客户端处理，因此web浏览器通常在将URI发送到服务器之前剥离片段。但这并不意味着，作为一个程序员，你不会得到<code>fragment</code>;您可以通过JavaScript或一些HTTP客户端库将其包含在GET请求中。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://sausheong:password@www.example.com/docs/file?name=sausheong&amp;location=singapore#summary</span><br></pre></td></tr></table></figure>
+
+<p>scheme是http，后面是冒号。sausheong:password后面跟着@(@)是用户和密码信息。接下来是层次结构部分的其余部分<code>www.example.com/docs/file</code>。分层部分的顶层是服务器的域名<code>www.example.com</code>，后面是<code>docs</code>，然后是<code>file</code>，每一个用正斜杠分隔。接下来是查询，从问号(?)之后开始。该查询由两个名称-值对组成:name&#x3D;sausheong和location&#x3D;singapore，并由一个&amp;号连接。最后，片段跟随在查询之后，从#开始。</p>
+<p>URL是一个字符串，所以URL中不允许有空格。此外，某些字符(如问号(?)和散列(#))在URL中具有特殊含义，因此不允许用于其他目的。为了克服这个限制，我们使用URL编码(也称为百分比编码)将这些特殊字符转换为其他内容。</p>
+<p>RFC 3986定义了一组保留或不保留的字符。保留列表中的所有内容都需要进行URL编码。URL编码通过将字符转换为ASCII中相应的字节值，然后将其表示为一对十六进制数字并在其前面加上百分号(%)来对字符进行编码。</p>
+<p>例如，空格的字节值在ASCII中为32，在十六进制中为20。因此，空格的URL编码是%20，它被用在URL中。这个例子显示了如果我使用我的名字和sau和sheong之间的空格的URL:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.example.com/docs/file?name=sau%20sheong&amp;location=singapore.</span><br></pre></td></tr></table></figure>
+
+<h2 id="Minimal-Api-应用程序"><a href="#Minimal-Api-应用程序" class="headerlink" title="Minimal Api 应用程序"></a>Minimal Api 应用程序</h2><img src="/image-20230618111543293.png" alt="image-20230618111543293" style="zoom:50%;" />
+
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="/image-20230618111856620.png" alt="image-20230618111856620"></p>
+<p>创建minimal Api应用后生成的文件目录结构说明。</p>
+<p>首先要注意的是，主项目WebApplication1被嵌套在具有解决方案名称的顶级目录中，在本例中也是WebApplication1。在这个顶级文件夹中，您还可以找到Visual Studio使用的解决方案(.sln)文件，尽管它隐藏在Visual Studio的解决方案资源管理器视图中。</p>
+<p>在解决方案文件夹中，您将找到项目文件夹，其中包含项目中最重要的文件:WebApplication1.csproj。该文件描述了如何构建项目，并列出了项目所需的其他NuGet包。Visual Studio没有显式地显示.csproj文件，但是如果在解决方案资源管理器中双击项目名称，就可以编辑它。在下一节中，我们将仔细研究这个项目文件。</p>
+<p>您的项目文件夹包含一个名为Properties的子文件夹，其中包含一个文件launchSettings.json。此文件控制Visual Studio将如何运行和调试应用程序。Visual Studio将其显示为解决方案资源管理器，不按字母顺序排列，位于项目顶部附近。项目中还有两个特殊节点:Dependencies和Connected Services，但它们在磁盘上没有相应的文件夹，它们显示了项目所依赖的所有依赖项的集合，例如NuGet包和远程服务。</p>
+<p>在项目文件夹的根目录下，您将发现两个JSON文件:appsettings.json 和appsettings.Development.json。它们提供了在运行时用于控制应用程序行为的配置设置。</p>
+<p>最后，Visual Studio会在项目文件夹中显示一个c#文件</p>
+<p>csproj文件：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;Project Sdk=&quot;Microsoft.NET.Sdk.Web&quot;&gt;</span><br><span class="line"></span><br><span class="line">  &lt;PropertyGroup&gt;</span><br><span class="line">    &lt;TargetFramework&gt;net7.0&lt;/TargetFramework&gt;</span><br><span class="line">    &lt;Nullable&gt;enable&lt;/Nullable&gt;</span><br><span class="line">    &lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;</span><br><span class="line">  &lt;/PropertyGroup&gt;</span><br><span class="line"></span><br><span class="line">&lt;/Project&gt;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Project元素上的Sdk属性包括描述如何构建项目的默认设置，而TargetFramework元素描述应用程序将运行的框架。对于.net Core 3.1项目，它的值为netcoreapp3.1;如果你在.net7上运行，这将是net7.0。您还可以启用和禁用编译器的各种特性，例如c# 10特性的可空引用类型和隐式using语句。</p>
+<p>您将对项目文件进行的最常见的更改是使用packagerreference元素添加额外的NuGet包。默认情况下，你的应用根本不引用任何NuGet包。</p>
+<p>通过在项目文件夹中运行<code>dotnet add package &lt;packagename&gt;</code>，您可以向项目添加NuGet引用。这将使用<code>&lt;PackageReference&gt;</code>节点更新项目文件，并恢复项目的NuGet包。例如，安装流行的<code>Newtonsoft.Json</code>库，你会运行</p>
+<p><code>dotnet add package Newtonsoft.Json</code></p>
+<p>这将对库的最新版本的引用添加到项目文件中，如下所示，并使Newtonsoft.Json名称空间在源代码文件中可用。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;Project Sdk=”Microsoft.NET.Sdk.Web”&gt;</span><br><span class="line">&lt;PropertyGroup&gt;</span><br><span class="line">&lt;TargetFramework&gt;net7.0&lt;/TargetFramework&gt;</span><br><span class="line">&lt;Nullable&gt;enable&lt;/Nullable&gt;</span><br><span class="line">&lt;ImplicitUsings&gt;enable&lt;/ImplicitUsings&gt;</span><br><span class="line">&lt;/PropertyGroup&gt;</span><br><span class="line">&lt;ItemGroup&gt;</span><br><span class="line">&lt;PackageReference Include=”NewtonSoft.Json” Version=”13.0.1” /&gt;</span><br><span class="line">&lt;/ItemGroup&gt;</span><br><span class="line">&lt;/Project&gt;</span><br></pre></td></tr></table></figure>
+
+<p>Program.cs文件，定义应用程序。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/asp-net/" rel="tag"># asp.net</a>
+              <a href="/tags/net/" rel="tag"># .net</a>
+              <a href="/tags/c/" rel="tag"># c#</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/15/springSecurity/" rel="prev" title="springSecurity">
+      <i class="fa fa-chevron-left"></i> springSecurity
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2023/09/22/%E5%BC%82%E6%AD%A5%E5%9F%BA%E7%A1%80/" rel="next" title="异步基础">
+      异步基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ASP-NET-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">ASP.NET 介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#HTTP%E5%8D%8F%E8%AE%AE"><span class="nav-number">1.1.</span> <span class="nav-text">HTTP协议</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-Request"><span class="nav-number">1.1.1.</span> <span class="nav-text">HTTP Request</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HTTP-Response"><span class="nav-number">1.1.2.</span> <span class="nav-text">HTTP Response</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URI"><span class="nav-number">1.1.3.</span> <span class="nav-text">URI</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Minimal-Api-%E5%BA%94%E7%94%A8%E7%A8%8B%E5%BA%8F"><span class="nav-number">1.2.</span> <span class="nav-text">Minimal Api 应用程序</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.2.1.</span> <span class="nav-text">项目结构</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lycheewang</p>
+  <div class="site-description" itemprop="description">生似浮游</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lycheewang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

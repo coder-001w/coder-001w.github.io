@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="异步基础2.1 等待一段时间当单元测试或重试时，通常会需要（异步）等待一段时间。 Task类型有一个静态方法Delay，其返回一个task，在指定时间后完成。下面的代码定义了一个异步完成的task 12345async Task&lt;T&gt; DelayTask&lt;T&gt;(T result, TimeSpan delay)&amp;#123;    await Task.Delay(delay">
+<meta property="og:type" content="article">
+<meta property="og:title" content="异步基础">
+<meta property="og:url" content="http://example.com/2023/09/22/%E5%BC%82%E6%AD%A5%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="储藏库">
+<meta property="og:description" content="异步基础2.1 等待一段时间当单元测试或重试时，通常会需要（异步）等待一段时间。 Task类型有一个静态方法Delay，其返回一个task，在指定时间后完成。下面的代码定义了一个异步完成的task 12345async Task&lt;T&gt; DelayTask&lt;T&gt;(T result, TimeSpan delay)&amp;#123;    await Task.Delay(delay">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-22T01:55:00.000Z">
+<meta property="article:modified_time" content="2023-09-22T01:57:45.787Z">
+<meta property="article:author" content="lycheewang">
+<meta property="article:tag" content="C#">
+<meta property="article:tag" content="异步基础">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/22/%E5%BC%82%E6%AD%A5%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>异步基础 | 储藏库</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">储藏库</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/22/%E5%BC%82%E6%AD%A5%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lycheewang">
+      <meta itemprop="description" content="生似浮游">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="储藏库">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          异步基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-22 09:55:00 / 修改时间：09:57:45" itemprop="dateCreated datePublished" datetime="2023-09-22T09:55:00+08:00">2023-09-22</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="异步基础"><a href="#异步基础" class="headerlink" title="异步基础"></a>异步基础</h1><h2 id="2-1-等待一段时间"><a href="#2-1-等待一段时间" class="headerlink" title="2.1 等待一段时间"></a>2.1 等待一段时间</h2><p>当单元测试或重试时，通常会需要（异步）等待一段时间。</p>
+<p><code>Task</code>类型有一个静态方法<code>Delay</code>，其返回一个task，在指定时间后完成。下面的代码定义了一个异步完成的task</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> <span class="title">Task</span>&lt;<span class="title">T</span>&gt; <span class="title">DelayTask</span>&lt;<span class="title">T</span>&gt;(<span class="params">T result, TimeSpan delay</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">await</span> Task.Delay(delay);	<span class="comment">//将timespan类型的参数传递给Task的Delay静态方法，以指定任务何时开始。</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当需要重试时，通常采用指数时间等待：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task&lt;<span class="built_in">string</span>&gt; <span class="title">DownloadSringWithRetries</span>(<span class="params">HttpClient client, <span class="built_in">string</span> uri</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 在一秒后重试，然后2秒，4秒</span></span><br><span class="line">    TimeSpan nextDelay = TimeSpan.FromSeconds(<span class="number">1</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">for</span>(<span class="built_in">int</span> i = <span class="number">1</span>; i!=<span class="number">3</span>; ++i)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">await</span> client.GetStringAsync(uri);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">catch</span></span><br><span class="line">        &#123;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">await</span> Task.Delay(nextDelay);</span><br><span class="line">        nextDelay = nextDelay + nextDelay;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 最后一次尝试</span></span><br><span class="line">   	<span class="keyword">return</span> <span class="keyword">await</span> client.GetStringAsync(uri);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>可以将<code>Task.Delay</code>作为一个简单的超时。<code>CancellationTokenSource</code>是通常用来实现超时的类型，可以将一个cancellation token包装在一个infinite的<code>Task.Delay</code>，以指定该任务在指定的时间后取消。最后，通过<code>Task.WhenAny</code>使用定时器task实现软定时器。如果服务器在三秒内没有回应，下面的代码将返回null:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task&lt;<span class="built_in">string</span>&gt; <span class="title">DownloadSringWithRetries</span>(<span class="params">HttpClient client, <span class="built_in">string</span> uri</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">using</span> <span class="keyword">var</span> cts = <span class="keyword">new</span> CancellationTokenSource(Timespan.FromeSeconds(<span class="number">3</span>));</span><br><span class="line">    Task&lt;<span class="built_in">string</span>&gt; downloadTask = client.GetStringAsync(uri);</span><br><span class="line">    Task timeoutTask = Task.Delay(Timeout.InfiniteTimeSpan, cts.Token);</span><br><span class="line">    </span><br><span class="line">    Task completedTask = <span class="keyword">await</span> Task.WhenAny(downloadTask, timeoutTask)</span><br><span class="line">    <span class="keyword">if</span>(completedTask == timeoutTask)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">await</span> downloadTask;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>将<code>Task.Delay</code>作为soft timeout的缺点是，即使操作超时，他也没有取消。也就是说，即使返回null，在task被丢弃之前，他也会一直下载。更好的操作是直接将cancellation token传入到操作中（GetStringAsync）。在某些无法取消的操作中，可以采用这种方式使他执行起来相似。</p>
+<span id="more"></span>
+
+<h2 id="2-2-返回Completed-Tasks"><a href="#2-2-返回Completed-Tasks" class="headerlink" title="2.2 返回Completed Tasks"></a>2.2 返回Completed Tasks</h2><p>作用：你需要实现一个同步方法，但是需要异步签名。特别是实现异步接口或者继承基类，但是想要同步实现它。</p>
+<p>解决方法：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">IMyAsyncInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Task&lt;<span class="built_in">int</span>&gt; <span class="title">GetValueAsync</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">MySynchronousImplementation</span> : <span class="title">IMyAsyncInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task&lt;<span class="built_in">int</span>&gt; <span class="title">GetValueAsync</span>()</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Task.FromResult(<span class="number">13</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>对于没有返回类型的Task，可以使用Task.CompletedTask</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">IMyAsyncInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Task <span class="title">DoSomethingAsync</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">MySynchronousImplementation</span> : <span class="title">IMyAsyncInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">DoSomethingAsync</span>()</span>;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Task.completedTask;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Task.FromResult</code>只对成功的结果返回completed task，如果需要其它类型的结果（一个带有异常的完成任务），可以使用<code>Task.FromeException()</code>，同理，对于使用Cancellation token已经被取消的任务，使用<code>Task.FromCanceled</code></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">Task</span>&lt;<span class="title">T</span>&gt; <span class="title">NotImplementedAsync</span>&lt;<span class="title">T</span>&gt;()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> Task.FromException(<span class="keyword">new</span> NotImplementedException());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">Task</span>&lt;<span class="title">int</span>&gt; <span class="title">GetValueAsync</span>(<span class="params">CancellationToken cancellationToken</span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span>(cancellationToken.IsCancellationRequsteed)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">return</span> Task.FromeCanceled&lt;<span class="built_in">int</span>&gt;(cancellationToken);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> Task.FromResult(<span class="number">13</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果你的同步实现可能会失败，你应该捕捉异常，使用<code>Task.FromeException()</code>进行返回。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title">IMyAsyncInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function">Task <span class="title">DoSomethingAsync</span>()</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">class</span> <span class="title">MySynchronousImplementation</span> : <span class="title">IMyAsyncInterface</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> Task <span class="title">DoSomethingAsync</span>()</span>;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">try</span></span><br><span class="line">        &#123;</span><br><span class="line">            DoSomethingSynchronously();</span><br><span class="line">            <span class="keyword">return</span> Task.CompletedTask;</span><br><span class="line">        &#125;</span><br><span class="line">		<span class="keyword">catch</span> (Exception ex)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span> Task.FromException(ex);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>讨论：如果需要使用同步代码实现异步方法，避免任何形式的阻塞。否则可以用异步实现。在BCL中<code>Console.In.ReadLine()</code>却是这样实现的，它通常阻塞调用线程直到读取一行数据，返回completed task。<strong>如果一个异步方法阻塞了，他会阻止调用的线程启动其他task，从而会损害并行甚至导致死锁。</strong>  </p>
+<p>如果经常使用同一个值，可以将考虑将其缓存。例如如果你创建了一个Task<int>,值为0，避免创建其他的实列来减少垃圾回收的损耗。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span>	<span class="keyword">static</span> <span class="keyword">readonly</span> Task&lt;<span class="built_in">int</span>&gt; zeroTask = Task.FromResult(<span class="number">0</span>);</span><br><span class="line"><span class="function">Task&lt;<span class="built_in">int</span>&gt; <span class="title">GetValueAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">	<span class="keyword">return</span> zeroTask;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>逻辑上，<code>Task.FromResult</code>等都是捷径和helper methods，更底层的是<code>TaskCompletionSource&lt;T&gt;</code>。通常只用后者来返回在未来完成的task。</p>
+<h2 id="2-3-汇报进度"><a href="#2-3-汇报进度" class="headerlink" title="2.3 汇报进度"></a>2.3 汇报进度</h2><p>当一个操作在执行时，你需要汇报进度。</p>
+<p>使用提供的<code>IProgress&lt;T&gt;</code>或者<code>Progress&lt;T&gt;</code>类型，你的async方法需要一个<code>IProgress&lt;T&gt;</code>参数，T是你需要回报的任意类型。、</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">MyMethodAsync</span>(<span class="params">Iprogress&lt;<span class="built_in">double</span>&gt; progress = <span class="literal">null</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">bool</span> done = <span class="literal">false</span>;</span><br><span class="line">    <span class="built_in">double</span> percentComplete = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>(!done)</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">        progress?.Report(percentComplete);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// calling method</span></span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">CallMyMethodAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> progress = <span class="keyword">new</span> Progress&lt;<span class="built_in">double</span>&gt;();</span><br><span class="line">    progress.ProgressChanged += (sender, args) =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">await</span> MyMethodAsync(progress);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>IProgress&lt;T&gt;</code>中的T可能是null，如果调用者不需要进度汇报。<code>IProgress&lt;T&gt;.Report()</code>方法是异步的，所以在报告进度之前，<code>MyMethodAsync</code>会继续执行，因此最好将T定义为不可变类型，或者至少是值类型。如果一个方法支持进度汇报，它应该支持取消。<code>Progress&lt;T&gt;</code>会捕捉它所创建的上下文，因此其回调方法也在那个上下文执行，无论Report方法是否在background线程调用。</p>
+<h2 id="2-4-等待一组Task完成"><a href="#2-4-等待一组Task完成" class="headerlink" title="2.4 等待一组Task完成"></a>2.4 等待一组Task完成</h2><p>有一组方法，你需要等待他们全部完成</p>
+<p>提供Task.WhenAll方法，参数为一组Task，在所有任务完成后返回一个Task。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Task task1 = Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span><br><span class="line">Task task2 = Task.Delay(TimeSpan.FromSeconds(<span class="number">2</span>));</span><br><span class="line">Task task3 = Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span><br><span class="line"><span class="keyword">await</span> Task.WhenAll(task1, task2, task3);</span><br></pre></td></tr></table></figure>
+
+<p>如果所有task都具有一样的result类型，并且他们都成功完成，Task.WhenAll返回一个数组，包含task result</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Task&lt;<span class="built_in">int</span>&gt; task1 = Task.FromResult(<span class="number">3</span>);</span><br><span class="line">Task&lt;<span class="built_in">int</span>&gt; task2 = Task.FromResult(<span class="number">5</span>);</span><br><span class="line">Task&lt;<span class="built_in">int</span>&gt; task3 = Task.FromResult(<span class="number">7</span>);</span><br><span class="line"><span class="built_in">int</span>[] results = <span class="keyword">await</span> Task.WhenAll(task1, task2, task3);</span><br><span class="line"><span class="comment">// &quot;results&quot; contains &#123; 3, 5, 7 &#125;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task&lt;<span class="built_in">string</span>&gt; <span class="title">DownloadAllAsync</span>(<span class="params">HttpClient client,</span></span></span><br><span class="line"><span class="params"><span class="function"> IEnumerable&lt;<span class="built_in">string</span>&gt; urls</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">// Define the action to do for each URL.</span></span><br><span class="line"> <span class="keyword">var</span> downloads = urls.Select(url =&gt; client.GetStringAsync(url));</span><br><span class="line"> <span class="comment">// Note that no tasks have actually started yet</span></span><br><span class="line"> <span class="comment">// because the sequence is not evaluated.</span></span><br><span class="line">    </span><br><span class="line"> <span class="comment">// Start all URLs downloading simultaneously.</span></span><br><span class="line"> Task&lt;<span class="built_in">string</span>&gt;[] downloadTasks = downloads.ToArray();</span><br><span class="line"> <span class="comment">// Now the tasks have all started.</span></span><br><span class="line">    </span><br><span class="line"> <span class="comment">// Asynchronously wait for all downloads to complete.</span></span><br><span class="line"> <span class="built_in">string</span>[] htmlPages = <span class="keyword">await</span> Task.WhenAll(downloadTasks);</span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">string</span>.Concat(htmlPages);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果任何一个任务抛出异常，则Task.WhenAll将用该异常使其返回的任务出错。如果多个任务抛出异常，那么所有这些异常都放在Task. whenall返回的Task上。然而，当await时，只会抛出其中一个。如果需要每个特定的异常，可以检查Task.WhenAll返回的Task上的exception属性。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ThrowNotImplementedExceptionAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">throw</span> <span class="keyword">new</span> NotImplementedException();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ThrowInvalidOperationExceptionAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">throw</span> <span class="keyword">new</span> InvalidOperationException();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ObserveOneExceptionAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">var</span> task1 = ThrowNotImplementedExceptionAsync();</span><br><span class="line"> <span class="keyword">var</span> task2 = ThrowInvalidOperationExceptionAsync();</span><br><span class="line"> <span class="keyword">try</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="keyword">await</span> Task.WhenAll(task1, task2);</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">catch</span> (Exception ex)</span><br><span class="line"> &#123;</span><br><span class="line"> <span class="comment">// &quot;ex&quot; is either NotImplementedException or InvalidOperationException.</span></span><br><span class="line"> ...</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ObserveAllExceptionsAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">var</span> task1 = ThrowNotImplementedExceptionAsync();</span><br><span class="line"> <span class="keyword">var</span> task2 = ThrowInvalidOperationExceptionAsync();</span><br><span class="line"> Task allTasks = Task.WhenAll(task1, task2);</span><br><span class="line"> <span class="keyword">try</span></span><br><span class="line"> &#123;</span><br><span class="line"> <span class="keyword">await</span> allTasks;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">catch</span></span><br><span class="line"> &#123;</span><br><span class="line"> AggregateException allExceptions = allTasks.Exception;</span><br><span class="line"> ...</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>大多数时候，在使用Task.WhenAll时，我并没有观察到所有的异常。通常只响应抛出的第一个错误而不是所有错误就足够了。注意，在前面的例子中，**<code>ThrowNotImplementedExceptionAsync</code>和<code>ThrowInvalidOperationExceptionAsync</code>方法不会直接抛出它们的异常，它们使用async关键字，因此它们的异常被捕获并放置在正常返回的任务上。**这是返回可等待类型的方法的正常和预期行为。</p>
+<h2 id="2-5-等待任意一个Task完成"><a href="#2-5-等待任意一个Task完成" class="headerlink" title="2.5 等待任意一个Task完成"></a>2.5 等待任意一个Task完成</h2><p>你有几个任务，只需要对其中一个正在完成的任务做出回应。<br>当您对一个操作进行多个独立尝试时，只需要某个尝试成功，最常遇到此问题。例如，您可以同时从多个web服务请求股票报价，但您只关心第一个响应的服务。</p>
+<p>使用Task.WhenAny方法。Task.WhenAny方法接受一系列任务，并返回一个任务，该任务在任意任务完成时完成。返回的任务的结果是已完成的任务。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Returns the length of data at the first URL to respond.</span></span><br><span class="line"><span class="function"><span class="keyword">async</span> Task&lt;<span class="built_in">int</span>&gt; <span class="title">FirstRespondingUrlAsync</span>(<span class="params">HttpClient client, <span class="built_in">string</span> urlA, <span class="built_in">string</span> urlB</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">// Start both downloads concurrently.</span></span><br><span class="line"> Task&lt;<span class="built_in">byte</span>[]&gt; downloadTaskA = client.GetByteArrayAsync(urlA);</span><br><span class="line"> Task&lt;<span class="built_in">byte</span>[]&gt; downloadTaskB = client.GetByteArrayAsync(urlB);</span><br><span class="line">    </span><br><span class="line"> <span class="comment">// Wait for either of the tasks to complete.</span></span><br><span class="line"> Task&lt;<span class="built_in">byte</span>[]&gt; completedTask = <span class="keyword">await</span> Task.WhenAny(downloadTaskA, downloadTaskB);</span><br><span class="line">    </span><br><span class="line"> <span class="comment">// Return the length of the data retrieved from that URL.</span></span><br><span class="line"> <span class="built_in">byte</span>[] data = <span class="keyword">await</span> completedTask;</span><br><span class="line"> <span class="keyword">return</span> data.Length;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>Task.WhenAny</code>返回的任务在faulted或取消状态不会完成。这个“外部”任务总是成功完成，它的结果值是第一个要完成的task(“内部”任务)。如果内部任务以异常完成，则该异常不会传播到外部任务(由<code>task.whenany</code>返回的那个)。通常应该在内部任务完成后等待，以确保观察到任何异常。</p>
+<p>当第一个任务完成后，考虑是否取消剩余的任务。如果其他任务没有被取消，但也没有等待，那么它们将被放弃。被放弃的任务将运行到完成，其结果将被忽略。这些被放弃的任务的任何异常也将被忽略。如果这些任务没有被取消，它们会继续运行，并且会使用不必要的资源，例如HTTP连接、DB连接或计时器。</p>
+<p>可以使用<code>Task.WhenAny</code>来实现超时(例如，使用<code>Task.Delay</code>作为任务之一)，但不建议这样做。用取消来表示超时更为自然，并且取消还有一个额外的好处，即如果操作超时，它可以实际取消操作</p>
+<h2 id="2-6-任务完成后处理"><a href="#2-6-任务完成后处理" class="headerlink" title="2.6 任务完成后处理"></a>2.6 任务完成后处理</h2><p>您有一组需要await的task，并且希望在每个task完成后对其进行一些处理。但是，您希望在每个task完成后立即对其进行处理，而不是等待任何其他任务。</p>
+<p>下面的示例代码启动三个delay task，然后等待每个task:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task&lt;<span class="built_in">int</span>&gt; <span class="title">DelayAndReturnAsync</span>(<span class="params"><span class="built_in">int</span> <span class="keyword">value</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="keyword">value</span>));</span><br><span class="line"> <span class="keyword">return</span> <span class="keyword">value</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Currently, this method prints &quot;2&quot;, &quot;3&quot;, and &quot;1&quot;.</span></span><br><span class="line"><span class="comment">// The desired behavior is for this method to print &quot;1&quot;, &quot;2&quot;, and &quot;3&quot;.</span></span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ProcessTasksAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">// Create a sequence of tasks.</span></span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt; taskA = DelayAndReturnAsync(<span class="number">2</span>);</span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt; taskB = DelayAndReturnAsync(<span class="number">3</span>);</span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt; taskC = DelayAndReturnAsync(<span class="number">1</span>);</span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt;[] tasks = <span class="keyword">new</span>[] &#123; taskA, taskB, taskC &#125;;</span><br><span class="line"> <span class="comment">// Await each task in order.</span></span><br><span class="line"> <span class="keyword">foreach</span> (Task&lt;<span class="built_in">int</span>&gt; task <span class="keyword">in</span> tasks)</span><br><span class="line"> &#123;</span><br><span class="line"> <span class="keyword">var</span> result = <span class="keyword">await</span> task;</span><br><span class="line"> Trace.WriteLine(result);</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>代码当前按顺序等待每个任务，即使序列中的第三个任务是第一个要完成的任务。您希望当每个任务完成执行处理(例如，Trace.WriteLine)，而不等待其他任务。</p>
+<p>有几种不同的方法可以用来解决这个问题。最简单的解决方案是通过引入一个高级异步方法来重构代码，该方法处理等待任务并处理其结果。</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task&lt;<span class="built_in">int</span>&gt; <span class="title">DelayAndReturnAsync</span>(<span class="params"><span class="built_in">int</span> <span class="keyword">value</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="keyword">value</span>));</span><br><span class="line"> <span class="keyword">return</span> <span class="keyword">value</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">AwaitAndProcessAsync</span>(<span class="params">Task&lt;<span class="built_in">int</span>&gt; task</span>)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="built_in">int</span> result = <span class="keyword">await</span> task;</span><br><span class="line"> Trace.WriteLine(result);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// This method now prints &quot;1&quot;, &quot;2&quot;, and &quot;3&quot;.</span></span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ProcessTasksAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">// Create a sequence of tasks.</span></span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt; taskA = DelayAndReturnAsync(<span class="number">2</span>);</span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt; taskB = DelayAndReturnAsync(<span class="number">3</span>);</span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt; taskC = DelayAndReturnAsync(<span class="number">1</span>);</span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt;[] tasks = <span class="keyword">new</span>[] &#123; taskA, taskB, taskC &#125;;</span><br><span class="line"> IEnumerable&lt;Task&gt; taskQuery =</span><br><span class="line"> <span class="function"><span class="keyword">from</span> t <span class="keyword">in</span> tasks <span class="keyword">select</span> <span class="title">AwaitAndProcessAsync</span>(<span class="params">t</span>)</span>;</span><br><span class="line"> Task[] processingTasks = taskQuery.ToArray();</span><br><span class="line"> <span class="comment">// Await all processing to complete</span></span><br><span class="line"> <span class="keyword">await</span> Task.WhenAll(processingTasks);</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>或者</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task&lt;<span class="built_in">int</span>&gt; <span class="title">DelayAndReturnAsync</span>(<span class="params"><span class="built_in">int</span> <span class="keyword">value</span></span>)</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="keyword">value</span>));</span><br><span class="line"> <span class="keyword">return</span> <span class="keyword">value</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// This method now prints &quot;1&quot;, &quot;2&quot;, and &quot;3&quot;.</span></span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ProcessTasksAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">// Create a sequence of tasks.</span></span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt; taskA = DelayAndReturnAsync(<span class="number">2</span>);</span><br><span class="line">Task&lt;<span class="built_in">int</span>&gt; taskB = DelayAndReturnAsync(<span class="number">3</span>);</span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt; taskC = DelayAndReturnAsync(<span class="number">1</span>);</span><br><span class="line"> Task&lt;<span class="built_in">int</span>&gt;[] tasks = <span class="keyword">new</span>[] &#123; taskA, taskB, taskC &#125;;</span><br><span class="line"> Task[] processingTasks = tasks.Select(<span class="keyword">async</span> t =&gt;</span><br><span class="line"> &#123;</span><br><span class="line"> <span class="keyword">var</span> result = <span class="keyword">await</span> t;</span><br><span class="line"> Trace.WriteLine(result);</span><br><span class="line"> &#125;).ToArray();</span><br><span class="line"> <span class="comment">// Await all processing to complete</span></span><br><span class="line"> <span class="keyword">await</span> Task.WhenAll(processingTasks);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p> 2.7 避免延续的上下文</p>
+<p>当异步方法在await之后恢复时，默认情况下它将在相同的上下文中恢复执行。如果该上下文是一个UI上下文，并且大量异步方法正在UI上下文上恢复，则可能会导致性能问题。</p>
+<p>为了避免在上下文上恢复，<code>await ConfigureAwait</code>的结果，并为其<code>continueOnCapturedContext</code>参数传递false:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ResumeOnContextAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span><br><span class="line"> <span class="comment">// This method resumes within the same context.</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ResumeWithoutContextAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line"> <span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>)).ConfigureAwait(<span class="literal">false</span>);</span><br><span class="line"> <span class="comment">// This method discards its context when it resumes.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在UI线程上运行太多的延续会导致性能问题。这种类型的性能问题很难诊断，因为不是单一的方法降低了系统的速度。更确切地说，随着应用程序变得越来越复杂，UI性能开始受到“成千上万的paper cuts”的影响</p>
+<p>在编写异步代码时，了解上下文也是一个好主意。通常，异步方法要么需要上下文(处理UI元素或者ASP. NET请求&#x2F;响应)或脱离上下文(执行后台操作)。如果您有一个异步方法，其中部分需要上下文，部分不需要上下文，请考虑将其拆分为两个(或更多)异步方法。这种方法有助于将代码更好地组织成层。</p>
+<h2 id="2-8-处理async-Task方法的异常"><a href="#2-8-处理async-Task方法的异常" class="headerlink" title="2.8 处理async Task方法的异常"></a>2.8 处理async Task方法的异常</h2><p>异常可以通过简单的try&#x2F;catch捕获，就像你对同步代码所做的那样:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ThrowExceptionAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> InvalidOperationException(<span class="string">&quot;Test&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">TestAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">try</span></span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">await</span> ThrowExceptionAsync();</span><br><span class="line">     &#125;</span><br><span class="line">         <span class="keyword">catch</span> (InvalidOperationException)</span><br><span class="line">     &#123;</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>从异步任务方法引发的异常放在返回的任务上。它们只有在await返回的Task时才会被触发.</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ThrowExceptionAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">await</span> Task.Delay(TimeSpan.FromSeconds(<span class="number">1</span>));</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> InvalidOperationException(<span class="string">&quot;Test&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">TestAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="comment">// The exception is thrown by the method and placed on the task.</span></span><br><span class="line">     Task task = ThrowExceptionAsync();</span><br><span class="line">     <span class="keyword">try</span></span><br><span class="line">     &#123;</span><br><span class="line">         <span class="comment">// The exception is re-raised here, where the task is awaited.</span></span><br><span class="line">         <span class="keyword">await</span> task;</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="keyword">catch</span> (InvalidOperationException)</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="comment">// The exception is correctly caught here.</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当异步任务方法抛出异常时，该异常被捕获并放在返回的任务上。由于async void方法没有一个Task来放置它们的异常，它们的行为是不同的</p>
+<h2 id="2-9-处理来自async-void方法的异常"><a href="#2-9-处理来自async-void方法的异常" class="headerlink" title="2.9 处理来自async void方法的异常"></a>2.9 处理来自async void方法的异常</h2><p>您有一个async void方法，并且需要处理从该方法传播的异常。</p>
+<p>没有好的解决办法。如果可能的话，将该方法改为返回Task而不是void。在某些情况下，这样做是不可能的;例如，假设您需要对iccommand实现进行单元测试(它必须返回void)。在这种情况下，你可以为你的Execute方法提供一个任务返回重载:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title">MyAsyncCommand</span> : <span class="title">ICommand</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">async</span> <span class="keyword">void</span> ICommand.Execute(<span class="built_in">object</span> parameter)</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">await</span> Execute(parameter);</span><br><span class="line">     &#125;</span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">async</span> Task <span class="title">Execute</span>(<span class="params"><span class="built_in">object</span> parameter</span>)</span></span><br><span class="line">     &#123;</span><br><span class="line">         ... <span class="comment">// Asynchronous command implementation goes here.</span></span><br><span class="line">     &#125;</span><br><span class="line">     ... <span class="comment">// Other members (CanExecute, etc.)</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>最好避免在async void方法之外传播异常。如果必须使用async void方法，请考虑将其所有代码包装在try块中并直接处理异常。</p>
+<p>选择async Task而不是async void的一个原因是，Task returning方法更容易测试。至少，用task-return方法重载void-returning方法会给你一个可测试的API接口</p>
+<p>如果您确实需要提供自己的<code>SynchronizationContext</code>类型(例如，<code>AsyncContext</code>)，确保不要在任何不属于你的线程上安装<code>SynchronizationContext</code>。一般来说，你不应该把这个类型放在任何已经有一个<code>Context</code>的线程上(比如UI或ASP. NET经典请求线程);也不应该在线程池线程上放置<code>SynchronizationContext</code>。控制台应用程序的主线程是属于你的，你自己手动创建的线程也是。</p>
+<h2 id="2-10-创建一个ValueTask"><a href="#2-10-创建一个ValueTask" class="headerlink" title="2.10 创建一个ValueTask"></a>2.10 创建一个ValueTask</h2><p>实现一个返回<code>ValueTask&lt;T&gt;</code>的方法</p>
+<p><code>ValueTask&lt;T&gt;</code>通常在可以返回同步结果而异步行为更少见的情况下用作返回类型。作为一般规则，对于您自己的应用程序代码，您应该使用<code>Task&lt;T&gt;</code>作为返回类型，而不是<code>ValueTask&lt;T&gt;</code>。只有在分析显示性能有所提高之后，才考虑在您自己的应用程序中使用<code>ValueTask&lt;T&gt;</code>作为返回类型。也就是说，在某些情况下，您需要实现一个返回<code>ValueTask&lt;T&gt;</code>的方法。<code>IAsyncDisposable</code>就是这样一种情况，它的<code>DisposeAsync</code>方法返回ValueTask。</p>
+<p>实现返回<code>ValueTask&lt;T&gt;</code>的方法最简单的方法是使用async和await，就像普通的async方法一样:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">async</span> ValueTask&lt;<span class="built_in">int</span>&gt; <span class="title">MethodAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">await</span> Task.Delay(<span class="number">100</span>); <span class="comment">// asynchronous work.</span></span><br><span class="line">     <span class="keyword">return</span> <span class="number">13</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><strong>很多时候，返回<code>ValueTask&lt;T&gt;</code>的方法能够立即返回值;在这种情况下，您可以使用<code>ValueTask&lt;T&gt;</code>构造函数对该场景进行优化，然后仅在必要时转发到慢速异步方法:</strong></p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ValueTask</span>&lt;<span class="title">int</span>&gt; <span class="title">MethodAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">if</span> (CanBehaveSynchronously)</span><br><span class="line">         <span class="keyword">return</span> <span class="keyword">new</span> ValueTask&lt;<span class="built_in">int</span>&gt;(<span class="number">13</span>);</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> ValueTask&lt;<span class="built_in">int</span>&gt;(SlowMethodAsync());</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> Task&lt;<span class="built_in">int</span>&gt; <span class="title">SlowMethodAsync</span>()</span>;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>对于非泛型的ValueTask也可以采用类似的方法。这里，ValueTask默认构造函数用于返回一个成功完成的ValueTask。下面的例子展示了一个<code>IAsyncDisposable</code>实现，它只运行一次异步处理逻辑;在以后的调用中，<code>DisposeAsync</code>方法会成功地同步完成:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Func&lt;Task&gt; _disposeLogic;</span><br><span class="line"><span class="function"><span class="keyword">public</span> ValueTask <span class="title">DisposeAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">if</span> (_disposeLogic == <span class="literal">null</span>)</span><br><span class="line">         <span class="keyword">return</span> <span class="literal">default</span>;</span><br><span class="line">    </span><br><span class="line">     <span class="comment">// Note: this simple example is not threadsafe;</span></span><br><span class="line">     <span class="comment">// if multiple threads call DisposeAsync,</span></span><br><span class="line">     <span class="comment">// the logic could run more than once.</span></span><br><span class="line">     Func&lt;Task&gt; logic = _disposeLogic;</span><br><span class="line">     _disposeLogic = <span class="literal">null</span>;</span><br><span class="line">     <span class="keyword">return</span> <span class="keyword">new</span> ValueTask(logic());</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>大多数方法应该返回<code>Task&lt;T&gt;</code>，因为使用<code>Task&lt;T&gt;</code>比使用<code>ValueTask&lt;T&gt;</code>有更少的缺陷。</p>
+<p>大多数情况下，如果您只是实现使用<code>ValueTask</code>或<code>ValueTask&lt;T&gt;</code>接口，那么您可以简单地使用async和await。更高级的实现是当你想自己使用<code>ValueTask&lt;T&gt;</code>时。</p>
+<p>本小节中介绍的方法是创建<code>ValueTask&lt;T&gt;</code>和<code>ValueTask</code>实例的更简单和更常用的方法。还有另一种方法更适合于更高级的场景，当您需要减少分配内存的损耗时。这种更高级的方法使您能够缓存或池化<code>IValueTaskSource&lt;T&gt;</code>的实现，并在多个异步方法调用中重用它。</p>
+<h2 id="2-11-使用ValueTask"><a href="#2-11-使用ValueTask" class="headerlink" title="2.11 使用ValueTask"></a>2.11 使用ValueTask</h2><p>使用await是使用ValueTask<T>或ValueTask值的最直接和最常见的方式。大多数时候，这就是你所需要做的:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ValueTask&lt;<span class="built_in">int</span>&gt; <span class="title">MethodAsync</span>()</span>;</span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ConsumingMethodAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="built_in">int</span> <span class="keyword">value</span> = <span class="keyword">await</span> MethodAsync();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>你也可以在执行并发操作后执行await，例如Task<T>:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ValueTask&lt;<span class="built_in">int</span>&gt; <span class="title">MethodAsync</span>()</span>;</span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ConsumingMethodAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     ValueTask&lt;<span class="built_in">int</span>&gt; valueTask = MethodAsync();</span><br><span class="line">     ... <span class="comment">// other concurrent work</span></span><br><span class="line">     <span class="built_in">int</span> <span class="keyword">value</span> = <span class="keyword">await</span> valueTask;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>这两种方法都是合适的，因为<code>ValueTask</code>只等待一次。这是<code>ValueTask</code>的限制之一。</p>
+<p>要执行更复杂的操作，可以通过调用<code>AsTask</code>将<code>ValueTask&lt;T&gt;</code>转换为<code>Task&lt;T&gt;</code>:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ValueTask&lt;<span class="built_in">int</span>&gt; <span class="title">MethodAsync</span>()</span>;</span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ConsumingMethodAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     Task&lt;<span class="built_in">int</span>&gt; task = MethodAsync().AsTask();</span><br><span class="line">     ... <span class="comment">// other concurrent work</span></span><br><span class="line">     <span class="built_in">int</span> <span class="keyword">value</span> = <span class="keyword">await</span> task;</span><br><span class="line">     <span class="built_in">int</span> anotherValue = <span class="keyword">await</span> task;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>多次等待Task<T>是完全安全的。您还可以用它做其他事情，比如异步等待多个操作完成</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">ValueTask&lt;<span class="built_in">int</span>&gt; <span class="title">MethodAsync</span>()</span>;</span><br><span class="line"><span class="function"><span class="keyword">async</span> Task <span class="title">ConsumingMethodAsync</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     Task&lt;<span class="built_in">int</span>&gt; task1 = MethodAsync().AsTask();</span><br><span class="line">     Task&lt;<span class="built_in">int</span>&gt; task2 = MethodAsync().AsTask();</span><br><span class="line">     <span class="built_in">int</span>[] results = <span class="keyword">await</span> Task.WhenAll(task1, task2);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然而，对于每个<code>ValueTask&lt;T&gt;</code>，您只能调用一次AsTask。通常的方法是立即将其转换为<code>Task&lt;T&gt;</code>，然后忽略<code>ValueTask&lt;T&gt;</code>。还要注意，您不能在同一个<code>ValueTask&lt;T&gt;</code>上同时等待和调用任务。</p>
+<p>冒着重复的风险，当您的代码调用返回<code>ValueTask</code>或<code>ValueTask&lt;T&gt;</code>的方法时，它应该立即等待ValueTask或者立即调用AsTask将其转换为任务。这个简单的指导方针并没有涵盖所有高级场景，但是大多数应用程序只需要做这些。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/%E5%BC%82%E6%AD%A5%E5%9F%BA%E7%A1%80/" rel="tag"># 异步基础</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/06/18/asp-net01/" rel="prev" title="asp.net01">
+      <i class="fa fa-chevron-left"></i> asp.net01
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">异步基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-%E7%AD%89%E5%BE%85%E4%B8%80%E6%AE%B5%E6%97%B6%E9%97%B4"><span class="nav-number">1.1.</span> <span class="nav-text">2.1 等待一段时间</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-%E8%BF%94%E5%9B%9ECompleted-Tasks"><span class="nav-number">1.2.</span> <span class="nav-text">2.2 返回Completed Tasks</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-%E6%B1%87%E6%8A%A5%E8%BF%9B%E5%BA%A6"><span class="nav-number">1.3.</span> <span class="nav-text">2.3 汇报进度</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-%E7%AD%89%E5%BE%85%E4%B8%80%E7%BB%84Task%E5%AE%8C%E6%88%90"><span class="nav-number">1.4.</span> <span class="nav-text">2.4 等待一组Task完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-%E7%AD%89%E5%BE%85%E4%BB%BB%E6%84%8F%E4%B8%80%E4%B8%AATask%E5%AE%8C%E6%88%90"><span class="nav-number">1.5.</span> <span class="nav-text">2.5 等待任意一个Task完成</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-6-%E4%BB%BB%E5%8A%A1%E5%AE%8C%E6%88%90%E5%90%8E%E5%A4%84%E7%90%86"><span class="nav-number">1.6.</span> <span class="nav-text">2.6 任务完成后处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-8-%E5%A4%84%E7%90%86async-Task%E6%96%B9%E6%B3%95%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="nav-number">1.7.</span> <span class="nav-text">2.8 处理async Task方法的异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-9-%E5%A4%84%E7%90%86%E6%9D%A5%E8%87%AAasync-void%E6%96%B9%E6%B3%95%E7%9A%84%E5%BC%82%E5%B8%B8"><span class="nav-number">1.8.</span> <span class="nav-text">2.9 处理来自async void方法的异常</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-10-%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AAValueTask"><span class="nav-number">1.9.</span> <span class="nav-text">2.10 创建一个ValueTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-11-%E4%BD%BF%E7%94%A8ValueTask"><span class="nav-number">1.10.</span> <span class="nav-text">2.11 使用ValueTask</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lycheewang</p>
+  <div class="site-description" itemprop="description">生似浮游</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lycheewang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
