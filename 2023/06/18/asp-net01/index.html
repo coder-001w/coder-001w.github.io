@@ -27,21 +27,21 @@
 <meta property="og:site_name" content="储藏库">
 <meta property="og:description" content="ASP.NET 介绍 一个典型的ASP. NET Core应用程序由几个层组成。ASP.NET Core框架代码处理来自客户端的请求，处理复杂的网络代码。然后框架调用处理程序（例如，Razor Pages和Web API控制器），您使用框架提供的原语编写。最后，这些处理程序调用应用程序的域逻辑，这些域逻辑通常是c#类和对象，没有任何ASP. NET Core特定的依赖。 ASP. NET Core">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="http://example.com/image-20230618095533242.png">
-<meta property="og:image" content="http://example.com/image-20230618100644060.png">
-<meta property="og:image" content="http://example.com/image-20230618110433820.png">
-<meta property="og:image" content="http://example.com/image-20230618110827843.png">
-<meta property="og:image" content="http://example.com/image-20230618111048953.png">
-<meta property="og:image" content="http://example.com/image-20230618111543293.png">
-<meta property="og:image" content="http://example.com/image-20230618111856620.png">
+<meta property="og:image" content="http://example.com/2023/06/18/asp-net01/image-20230618095533242.png">
+<meta property="og:image" content="http://example.com/2023/06/18/asp-net01/image-20230618100644060.png">
+<meta property="og:image" content="http://example.com/2023/06/18/asp-net01/image-20230618110433820.png">
+<meta property="og:image" content="http://example.com/2023/06/18/asp-net01/image-20230618110827843.png">
+<meta property="og:image" content="http://example.com/2023/06/18/asp-net01/image-20230618111048953.png">
+<meta property="og:image" content="http://example.com/2023/06/18/asp-net01/image-20230618111543293.png">
+<meta property="og:image" content="http://example.com/2023/06/18/asp-net01/image-20230618111856620.png">
 <meta property="article:published_time" content="2023-06-18T01:51:25.000Z">
-<meta property="article:modified_time" content="2023-09-22T02:03:28.110Z">
+<meta property="article:modified_time" content="2023-09-22T02:24:43.126Z">
 <meta property="article:author" content="lycheewang">
 <meta property="article:tag" content="asp.net">
 <meta property="article:tag" content=".net">
 <meta property="article:tag" content="c#">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/image-20230618095533242.png">
+<meta name="twitter:image" content="http://example.com/2023/06/18/asp-net01/image-20230618095533242.png">
 
 <link rel="canonical" href="http://example.com/2023/06/18/asp-net01/">
 
@@ -191,7 +191,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-09-22 10:03:28" itemprop="dateModified" datetime="2023-09-22T10:03:28+08:00">2023-09-22</time>
+                <time title="修改时间：2023-09-22 10:24:43" itemprop="dateModified" datetime="2023-09-22T10:24:43+08:00">2023-09-22</time>
               </span>
 
           
@@ -205,7 +205,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h1 id="ASP-NET-介绍"><a href="#ASP-NET-介绍" class="headerlink" title="ASP.NET 介绍"></a>ASP.NET 介绍</h1><p><img src="/image-20230618095533242.png" alt="image-20230618095533242"></p>
+        <h1 id="ASP-NET-介绍"><a href="#ASP-NET-介绍" class="headerlink" title="ASP.NET 介绍"></a>ASP.NET 介绍</h1><p><img src="/2023/06/18/asp-net01/image-20230618095533242.png" alt="image-20230618095533242"></p>
 <p>一个典型的ASP. NET Core应用程序由几个层组成。ASP.NET Core框架代码处理来自客户端的请求，处理复杂的网络代码。然后框架调用处理程序（例如，Razor Pages和Web API控制器），您使用框架提供的原语编写。最后，这些处理程序调用应用程序的域逻辑，这些域逻辑通常是c#类和对象，没有任何ASP. NET Core特定的依赖。</p>
 <p>ASP. NET Core提供了一个通用的web框架，可以用来构建各种各样的应用程序。ASP. NET Core包括支持许多不同范例的api：</p>
 <span id="more"></span>
@@ -220,17 +220,17 @@
 <li><code>Blazor Server</code>：用于构建有状态的应用程序，在服务器上呈现，通过WebSockets发送UI事件和页面更新，以提供客户端单页面应用程序的感觉，但具有与服务器呈现应用程序的轻松开发特性。</li>
 </ul>
 <p>HTTP Web 工作流程：</p>
-<img src="/image-20230618100644060.png" alt="image-20230618100644060" style="zoom:50%;" />
+<img src="image-20230618100644060.png" alt="image-20230618100644060" style="zoom:50%;" />
 
 <p>用户首先请求一个网页，这导致一个HTTP请求被发送到服务器。服务器解释请求，生成必要的HTML，并将其以HTTP响应的形式发送回来。浏览器就可以显示网页了。</p>
 <p>asp.net core 处理请求示意图：</p>
-<p><img src="/image-20230618110433820.png" alt="image-20230618110433820"></p>
+<p><img src="/2023/06/18/asp-net01/image-20230618110433820.png" alt="image-20230618110433820"></p>
 <p>请求通过网络被asp.net core 应用程序接收。ASP. NET Core应用程序有一个内置的web服务器，默认情况下是<code>Kestrel</code>，它负责接收原始请求并构造数据的内部表示，即<code>HttpContext对象</code>，该对象可以被应用程序的其余部分使用。</p>
 <p>您的应用程序可以使用存储在HttpContext中的详细信息来生成对请求的适当响应，这可能是生成一些HTML，返回“访问被拒绝”消息，或发送电子邮件，所有这些都取决于您的应用程序的需求。</p>
 <p>一旦应用程序完成了对请求的处理，它将把响应返回给web服务器。ASP. NET Core web服务器会将该表示转换为原始HTTP响应并将其发送到网络，网络会将其转发到用户的浏览器。</p>
-<p><img src="/image-20230618110827843.png" alt="image-20230618110827843"></p>
+<p><img src="/2023/06/18/asp-net01/image-20230618110827843.png" alt="image-20230618110827843"></p>
 <p>asp.net core 应用模型。</p>
-<p><img src="/image-20230618111048953.png" alt="image-20230618111048953"></p>
+<p><img src="/2023/06/18/asp-net01/image-20230618111048953.png" alt="image-20230618111048953"></p>
 <p>使用反向代理的应用。反向代理使得应用更安全，利于负载均衡和拓展。</p>
 <p>每个请求都传递给中间件管道，中间件管道可能会对其进行修改，然后将其传递给管道末端的端点中间件以生成响应。响应通过中间件返回到服务器，最后发送到浏览器。</p>
 <p>HttpContext是由ASP. NET core web服务器构造的。它被应用程序用作单个请求的存储箱。任何特定于此特定请求和后续响应的内容都可以与其关联并存储在其中。这可能包括请求的属性、特定于请求的服务、已加载的数据或已发生的错误。web服务器用原始HTTP请求的细节和其他配置细节填充初始HttpContext，并将其传递给应用程序的其余部分。</p>
@@ -412,9 +412,9 @@
 <p>例如，空格的字节值在ASCII中为32，在十六进制中为20。因此，空格的URL编码是%20，它被用在URL中。这个例子显示了如果我使用我的名字和sau和sheong之间的空格的URL:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.example.com/docs/file?name=sau%20sheong&amp;location=singapore.</span><br></pre></td></tr></table></figure>
 
-<h2 id="Minimal-Api-应用程序"><a href="#Minimal-Api-应用程序" class="headerlink" title="Minimal Api 应用程序"></a>Minimal Api 应用程序</h2><img src="/image-20230618111543293.png" alt="image-20230618111543293" style="zoom:50%;" />
+<h2 id="Minimal-Api-应用程序"><a href="#Minimal-Api-应用程序" class="headerlink" title="Minimal Api 应用程序"></a>Minimal Api 应用程序</h2><img src="image-20230618111543293.png" alt="image-20230618111543293" style="zoom:50%;" />
 
-<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="/image-20230618111856620.png" alt="image-20230618111856620"></p>
+<h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><p><img src="/2023/06/18/asp-net01/image-20230618111856620.png" alt="image-20230618111856620"></p>
 <p>创建minimal Api应用后生成的文件目录结构说明。</p>
 <p>首先要注意的是，主项目WebApplication1被嵌套在具有解决方案名称的顶级目录中，在本例中也是WebApplication1。在这个顶级文件夹中，您还可以找到Visual Studio使用的解决方案(.sln)文件，尽管它隐藏在Visual Studio的解决方案资源管理器视图中。</p>
 <p>在解决方案文件夹中，您将找到项目文件夹，其中包含项目中最重要的文件:WebApplication1.csproj。该文件描述了如何构建项目，并列出了项目所需的其他NuGet包。Visual Studio没有显式地显示.csproj文件，但是如果在解决方案资源管理器中双击项目名称，就可以编辑它。在下一节中，我们将仔细研究这个项目文件。</p>
