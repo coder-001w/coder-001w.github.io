@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/AOP%E9%9D%A2%E5%90%91%E5%88%87%E9%9D%A2%E7%BC%96%E7%A8%8B/C1RA4mBEoxNDFGl.png">
 <meta property="article:published_time" content="2023-06-12T07:53:18.000Z">
-<meta property="article:modified_time" content="2023-06-12T09:08:18.000Z">
+<meta property="article:modified_time" content="2023-09-22T02:04:23.129Z">
 <meta property="article:author" content="lycheewang">
 <meta property="article:tag" content="spring">
 <meta property="article:tag" content="mybatis">
@@ -176,10 +176,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-06-12 15:53:18 / 修改时间：17:08:18" itemprop="dateCreated datePublished" datetime="2023-06-12T15:53:18+08:00">2023-06-12</time>
+              <time title="创建时间：2023-06-12 15:53:18" itemprop="dateCreated datePublished" datetime="2023-06-12T15:53:18+08:00">2023-06-12</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-09-22 10:04:23" itemprop="dateModified" datetime="2023-09-22T10:04:23+08:00">2023-09-22</time>
+              </span>
 
           
 
@@ -193,6 +199,8 @@
 
       
         <h1 id="Spring数据库框架整合"><a href="#Spring数据库框架整合" class="headerlink" title="Spring数据库框架整合"></a>Spring数据库框架整合</h1><h2 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h2><p>在之前，我们如果需要创建一个JDBC的连接，那么必须使用<code>DriverManager.getConnection()</code>来创建连接，连接建立后，我们才可以进行数据库操作。而学习了Mybatis之后，我们就不用再去使用<code>DriverManager</code>为我们提供连接对象，而是直接使用Mybatis为我们提供的<code>SqlSessionFactory</code>工具类来获取对应的<code>SqlSession</code>通过会话对象去操作数据库。</p>
+<span id="more"></span>
+
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//1. 通过DriverManager来获得数据库连接</span></span><br><span class="line"><span class="keyword">try</span> (<span class="type">Connection</span> <span class="variable">connection</span> <span class="operator">=</span> DriverManager.getConnection(<span class="string">&quot;连接URL&quot;</span>,<span class="string">&quot;用户名&quot;</span>,<span class="string">&quot;密码&quot;</span>);</span><br><span class="line">     <span class="comment">//2. 创建一个用于执行SQL的Statement对象</span></span><br><span class="line">     <span class="type">Statement</span> <span class="variable">statement</span> <span class="operator">=</span> connection.createStatement())&#123;   <span class="comment">//注意前两步都放在try()中，因为在最后需要释放资源！</span></span><br><span class="line">    <span class="comment">//3. 执行SQL语句，并得到结果集</span></span><br><span class="line">    <span class="type">ResultSet</span> <span class="variable">set</span> <span class="operator">=</span> statement.executeQuery(<span class="string">&quot;select * from 表名&quot;</span>);</span><br><span class="line">    <span class="comment">//4. 查看结果</span></span><br><span class="line">    <span class="keyword">while</span> (set.next())&#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;<span class="keyword">catch</span> (SQLException e)&#123;</span><br><span class="line">    e.printStackTrace();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//5. 释放资源，try-with-resource语法会自动帮助我们close</span></span><br></pre></td></tr></table></figure>
 
 <p>mybatis:</p>
