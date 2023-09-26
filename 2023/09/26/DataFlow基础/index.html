@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="DataFlow基础TPL Dataflow是一个功能强大的库，它使您能够创建mesh或管道，然后(异步)通过它发送数据。数据流是一种非常声明式的编码风格：通常，您首先完全定义mesh，然后开始处理数据。mesh最终成为数据流过的结构。 每个mesh由相互连接的各种块组成。单个块很简单，负责数据处理中的单个步骤。当一个块完成对其数据的处理时，它将把结果传递给任何链接的块。 TPL DataFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DataFlow基础">
+<meta property="og:url" content="http://example.com/2023/09/26/DataFlow%E5%9F%BA%E7%A1%80/index.html">
+<meta property="og:site_name" content="储藏库">
+<meta property="og:description" content="DataFlow基础TPL Dataflow是一个功能强大的库，它使您能够创建mesh或管道，然后(异步)通过它发送数据。数据流是一种非常声明式的编码风格：通常，您首先完全定义mesh，然后开始处理数据。mesh最终成为数据流过的结构。 每个mesh由相互连接的各种块组成。单个块很简单，负责数据处理中的单个步骤。当一个块完成对其数据的处理时，它将把结果传递给任何链接的块。 TPL DataFlow">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-09-26T08:03:36.000Z">
+<meta property="article:modified_time" content="2023-09-26T08:04:33.783Z">
+<meta property="article:author" content="lycheewang">
+<meta property="article:tag" content="C#">
+<meta property="article:tag" content="DataFlow">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/2023/09/26/DataFlow%E5%9F%BA%E7%A1%80/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>DataFlow基础 | 储藏库</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">储藏库</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/09/26/DataFlow%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="lycheewang">
+      <meta itemprop="description" content="生似浮游">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="储藏库">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          DataFlow基础
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-09-26 16:03:36 / 修改时间：16:04:33" itemprop="dateCreated datePublished" datetime="2023-09-26T16:03:36+08:00">2023-09-26</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="DataFlow基础"><a href="#DataFlow基础" class="headerlink" title="DataFlow基础"></a><code>DataFlow</code>基础</h1><p><code>TPL Dataflow</code>是一个功能强大的库，它使您能够创建mesh或管道，然后(异步)通过它发送数据。数据流是一种非常声明式的编码风格：通常，您首先完全定义mesh，然后开始处理数据。mesh最终成为数据流过的结构。</p>
+<p>每个mesh由相互连接的各种块组成。单个块很简单，负责数据处理中的单个步骤。当一个块完成对其数据的处理时，它将把结果传递给任何链接的块。</p>
+<p><code>TPL DataFlow</code>在<code>NuGet</code>包 <code>System.Threading.Tasks.Dataflow</code> 中</p>
+<span id="more"></span>
+
+<h2 id="5-1-链接Block"><a href="#5-1-链接Block" class="headerlink" title="5.1 链接Block"></a>5.1 链接Block</h2><p>您需要将数据流块彼此链接以创建mesh。</p>
+<p>TPL数据流库提供的块只定义了最基本的成员。许多有用的TPL数据流方法实际上是扩展方法。<br><code>LinkTo</code>扩展方法提供了一种简单的方法将数据流块链接在一起:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> multiplyBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item * <span class="number">2</span>);</span><br><span class="line"><span class="keyword">var</span> subtractBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item - <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 链接之后，退出multiplyBlock的值将进入subtractBlock。</span></span><br><span class="line">multiplyBlock.LinkTo(subtractBlock);</span><br></pre></td></tr></table></figure>
+
+<p>默认情况下，链接数据流块只传播数据;它们不传播 <code>completion</code>(或错误)。如果您的数据流是线性的(如管道)，那么您可能希望传播<code>completion</code>。要传播<code>completion</code>(和错误)，可以设置<code>PropagateCompletion</code>选项:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> multiplyBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item * <span class="number">2</span>);</span><br><span class="line"><span class="keyword">var</span> subtractBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item - <span class="number">2</span>);</span><br><span class="line"><span class="keyword">var</span> options = <span class="keyword">new</span> DataflowLinkOptions &#123; PropagateCompletion = <span class="literal">true</span> &#125;;</span><br><span class="line">multiplyBlock.LinkTo(subtractBlock, options);</span><br><span class="line">...</span><br><span class="line"><span class="comment">// The first block&#x27;s completion is automatically propagated to the second block.</span></span><br><span class="line">multiplyBlock.Complete();</span><br><span class="line"><span class="keyword">await</span> subtractBlock.Completion;</span><br></pre></td></tr></table></figure>
+
+<p>一旦链接，数据将自动从源块流向目标块。<code>PropagateCompletion</code>选项除了传输数据外，还传输<code>Completion</code>;然而，在管道中的每一步，错误块都会将其异常传播到包装在<code>AggregateException</code>中的下一个块。所以，如果你有一个很长的管道来完成，原始的错误可能嵌套在多个<code>AggregateException</code>实例中。<code>AggregateException</code>有几个成员，比如<code>Flatten</code>，可以帮助处理这种情况下的错误。</p>
+<p>可以用多种方式链接数据流块;你的mesh可以有分叉和连接，甚至循环。然而，对于大多数场景来说，简单的线性管道已经足够了。我们将主要处理管道(并简要介绍分叉)</p>
+<p><code>DataflowLinkOptions</code>类型为您提供了可以在链接上设置的几个不同选项(例如本解决方案中使用的<code>PropagateCompletion</code>选项)，<code>inkTo</code>重载还可以接受一个谓词，您可以使用该谓词来过滤哪些数据可以通过链接。如果数据没有通过过滤器，它不会被丢弃。通过过滤器的数据通过该链接;没有通过过滤器的数据会尝试通过替代链接，如果没有其他链接可供选择，则会留在块中。<strong>如果一个数据项卡在这样的块中，那么该块将不会产生任何其他数据项;整个块将停止运行，直到该数据项被删除。</strong></p>
+<h2 id="5-2-传播错误"><a href="#5-2-传播错误" class="headerlink" title="5.2 传播错误"></a>5.2 传播错误</h2><p>需要一种方法来响应数据流mesh中可能发生的错误。</p>
+<p>如果传递给数据流块的委托抛出异常，则该块将进入故障状态。当一个块处于故障状态时，它将丢弃所有数据(并停止接受新数据)。下面代码中的块永远不会产生任何输出数据;第一个值引发异常，第二个值被丢弃:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> block = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt;</span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">if</span> (item == <span class="number">1</span>)</span><br><span class="line">     <span class="keyword">throw</span> <span class="keyword">new</span> InvalidOperationException(<span class="string">&quot;Blech.&quot;</span>);</span><br><span class="line">     <span class="keyword">return</span> item * <span class="number">2</span>;</span><br><span class="line">&#125;);</span><br><span class="line">block.Post(<span class="number">1</span>);</span><br><span class="line">block.Post(<span class="number">2</span>);</span><br></pre></td></tr></table></figure>
+
+<p>要从数据流块捕获异常，你应该等待它的<code>Completion</code>属性。<code>Completion</code>属性返回一个<code>Task</code>，该<code>Task</code>将在块完成时完成，如果块出现故障，则<code>Completion Task</code>也会出现故障:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">var</span> block = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt;</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">if</span> (item == <span class="number">1</span>)</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> InvalidOperationException(<span class="string">&quot;Blech.&quot;</span>);</span><br><span class="line">         <span class="keyword">return</span> item * <span class="number">2</span>;</span><br><span class="line">     &#125;);</span><br><span class="line">     block.Post(<span class="number">1</span>);</span><br><span class="line">     <span class="keyword">await</span> block.Completion;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (InvalidOperationException)</span><br><span class="line">&#123;</span><br><span class="line"> <span class="comment">// The exception is caught here.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>当使用<code>PropagateCompletion</code>链接选项传播<code>Completion</code>时，也会传播错误。然而，异常被封装在<code>AggregateException</code>中传递到下一个块。下面的例子从管道的末端捕获异常，所以如果一个异常是从早期块传播的，它将捕获<code>AggregateException</code>:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">var</span> multiplyBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt;</span><br><span class="line">     &#123;</span><br><span class="line">         <span class="keyword">if</span> (item == <span class="number">1</span>)</span><br><span class="line">         <span class="keyword">throw</span> <span class="keyword">new</span> InvalidOperationException(<span class="string">&quot;Blech.&quot;</span>);</span><br><span class="line">         <span class="keyword">return</span> item * <span class="number">2</span>;</span><br><span class="line">     &#125;);</span><br><span class="line">     <span class="keyword">var</span> subtractBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item - <span class="number">2</span>);</span><br><span class="line">     multiplyBlock.LinkTo(subtractBlock,</span><br><span class="line">         <span class="keyword">new</span> DataflowLinkOptions &#123; PropagateCompletion = <span class="literal">true</span> &#125;);</span><br><span class="line">     multiplyBlock.Post(<span class="number">1</span>);</span><br><span class="line">     <span class="keyword">await</span> subtractBlock.Completion;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">catch</span> (AggregateException)</span><br><span class="line">&#123;</span><br><span class="line">     <span class="comment">// The exception is caught here.</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>每个块将传入的错误包装在<code>AggregateException</code>中，即使传入的错误已经是<code>AggregateException</code>。如果错误发生在管道的早期，并且在观察到它之前沿着几个链接传播，那么原始错误将被包装在多层<code>AggregateException</code>中。<code>AggregateException.Flatten</code>方法简化了这种情况下的错误处理。</p>
+<p>当您构建mesh(或管道)时，请考虑如何处理错误。在更简单的情况下，最好只传播错误并在最后捕获一次。在更复杂的网格中，您可能需要在数据流完成时观察每个块。</p>
+<p><strong>或者，如果您希望您的块在面对异常时仍然可行，您可以选择将异常视为另一种数据，并让它们与正确处理的数据项一起流经网格。使用这种模式，你可以保持你的数据流网格的操作，因为块本身不会故障，并继续处理下一个数据项。</strong></p>
+<h2 id="5-3-取消链接块"><a href="#5-3-取消链接块" class="headerlink" title="5.3 取消链接块"></a>5.3 取消链接块</h2><p>在处理过程中，需要动态地更改数据流的结构。这是一种几乎不需要的高级场景。</p>
+<p>您可以随时链接或取消链接数据流块;数据可以自由地通过mesh，并且在任何时候连接或断开链接仍然是安全的。链接和解除链接都是完全线程安全的。<strong>当您创建一个数据流块链接时，请保留LinkTo方法返回的IDisposable，并在您想要解除块链接时处理它</strong>：</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> multiplyBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item * <span class="number">2</span>);</span><br><span class="line"><span class="keyword">var</span> subtractBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item - <span class="number">2</span>);</span><br><span class="line">IDisposable link = multiplyBlock.LinkTo(subtractBlock);</span><br><span class="line">multiplyBlock.Post(<span class="number">1</span>);</span><br><span class="line">multiplyBlock.Post(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Unlink the blocks.</span></span><br><span class="line"><span class="comment">// The data posted above may or may not have already gone through the link.</span></span><br><span class="line"><span class="comment">// In real-world code, consider a using block rather than calling Dispose.</span></span><br><span class="line">link.Dispose();</span><br></pre></td></tr></table></figure>
+
+<p>除非您能保证链路处于空闲状态，否则在解除链接时将出现竞争条件。然而，这些竞争条件通常不是一个问题;<strong>数据要么在链接断开之前流过该链接，要么不流过。不存在会导致重复或数据丢失的竞争条件。</strong><br>解除链接是一种高级场景，但它在少数情况下可能很有用。例如，无法更改链接的过滤器。要更改现有链接上的过滤器，您必须取消旧的链接，并使用新的filter(可选设置)创建一个新的链接</p>
+<h2 id="5-4-块的限流"><a href="#5-4-块的限流" class="headerlink" title="5.4 块的限流"></a>5.4 块的限流</h2><p>数据流网格中有一个分叉场景，并且希望数据以负载均衡的方式流动。</p>
+<p>默认情况下，当一个块产生输出数据时，它将检查它的所有链接(按照它们被创建的顺序)，并尝试一次一个地沿着每个链接传输数据。此外，默认情况下，每个块将维护一个输入缓冲区，并在准备处理数据之前接受任意数量的数据</p>
+<p>这在分叉场景中导致了一个问题，其中一个源块链接到两个目标块：第二个块会被饿死。当源块产生数据时，它将尝试将数据沿每个链接传输。<strong>第一个目标块总是接受数据并对其进行缓冲，因此源块永远不会尝试将数据流传输到第二个目标块。</strong>这个问题可以通过使用<code>BoundedCapacity</code>块选项来限流目标块来解决。默认情况下，<code>BoundedCapacity</code>设置为<code>DataflowBlockOptions.Unbounded</code>，它使第一个目标块缓冲所有数据，即使它还没有准备好处理它</p>
+<p><code>BoundedCapacity</code>可以设置为大于零的任何值(当然，也可以设置为<code>DataflowBlockOptions.Unbounded</code>)。只要目标块能够跟上来自源块的数据，简单的值1就足够了:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sourceBlock = <span class="keyword">new</span> BufferBlock&lt;<span class="built_in">int</span>&gt;();</span><br><span class="line"><span class="keyword">var</span> options = <span class="keyword">new</span> DataflowBlockOptions &#123; BoundedCapacity = <span class="number">1</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> targetBlockA = <span class="keyword">new</span> BufferBlock&lt;<span class="built_in">int</span>&gt;(options);</span><br><span class="line"><span class="keyword">var</span> targetBlockB = <span class="keyword">new</span> BufferBlock&lt;<span class="built_in">int</span>&gt;(options);</span><br><span class="line">sourceBlock.LinkTo(targetBlockA);</span><br><span class="line">sourceBlock.LinkTo(targetBlockB);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>限流对于分支场景中的负载平衡很有用，但它也可以用于任何您想要限制行为的地方。例如，如果您正在使用来自I&#x2F;O操作的数据填充数据流mesh，则可以将<code>BoundedCapacity</code>应用于mesh中的块。这样，你就不会读取太多的I&#x2F;O数据，直到你的网格准备好了，你的mesh不会在它能够处理它之前缓冲所有的输入数据.</p>
+<h2 id="5-5-数据流块并行处理"><a href="#5-5-数据流块并行处理" class="headerlink" title="5.5 数据流块并行处理"></a>5.5 数据流块并行处理</h2><p>您希望在数据流网格中执行一些并行处理</p>
+<p><strong>默认情况下，每个数据流块之间是相互独立的。当将两个块连接在一起时，它们将独立处理。因此，每个数据流网格都有一些自然的并行性</strong></p>
+<p>如果需要更进一步——例如，如果您有一个特定的块需要进行大量的CPU计算—<strong>那么可以通过设置<code>MaxDegreeOfParallelism</code>选项来指示该块对其输入数据并行操作</strong>。<strong>默认情况下，此选项设置为1，因此每个数据流块一次只处理一个数据块。</strong></p>
+<p><code>BoundedCapacity</code>可以设置为<code>DataflowBlockOptions.Infinite</code>或任何大于零的值。下面的例子允许任意数量的任务同时对数据进行乘法运算:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> multiplyBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(</span><br><span class="line">     item =&gt; item * <span class="number">2</span>,</span><br><span class="line">     <span class="keyword">new</span> ExecutionDataflowBlockOptions</span><br><span class="line">     &#123;</span><br><span class="line">     MaxDegreeOfParallelism = DataflowBlockOptions.Unbounded</span><br><span class="line"> &#125;);</span><br><span class="line"><span class="keyword">var</span> subtractBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item - <span class="number">2</span>);</span><br><span class="line">multiplyBlock.LinkTo(subtractBlock);</span><br></pre></td></tr></table></figure>
+
+<p><code>MaxDegreeOfParallelism</code>选项使块内的并行处理变得容易。不那么容易的是确定哪些块需要它。一种技术是在调试器中暂停数据流的执行，在那里您可以看到排队的数据项的数量(即，尚未被块处理的数据项)。意外数量的数据项可能表明一些重构或并行化将有所帮助。</p>
+<p>如果数据流块进行异步处理，<code>MaxDegreeOfParallelism</code>也可以工作。在这种情况下，<code>MaxDegreeOfParallelism</code>选项指定了并发的级别，即一定数量的slots。每个数据项在块开始处理时占用一个槽，只有在异步处理完全完成时才离开该槽。</p>
+<h2 id="5-6-创建自定义块"><a href="#5-6-创建自定义块" class="headerlink" title="5.6 创建自定义块"></a>5.6 创建自定义块</h2><p>您希望将可重用的逻辑放入自定义数据流块中。这样做可以创建包含复杂逻辑的更大的块。</p>
+<p>通过使用<code>Encapsulate</code>方法，您可以删除具有单个输入和输出块的数据流网格的任何部分。<code>Encapsulate</code>将从两个端点中创建一个单独的块。在这些端点之间传播数据和完成是您的责任。下面的代码用两个块创建了一个自定义数据流块，传播数据和Completion:</p>
+<figure class="highlight c#"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">IPropagatorBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt; <span class="title">CreateMyCustomBlock</span>()</span></span><br><span class="line">&#123;</span><br><span class="line">     <span class="keyword">var</span> multiplyBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item * <span class="number">2</span>);</span><br><span class="line">     <span class="keyword">var</span> addBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item + <span class="number">2</span>);</span><br><span class="line">     <span class="keyword">var</span> divideBlock = <span class="keyword">new</span> TransformBlock&lt;<span class="built_in">int</span>, <span class="built_in">int</span>&gt;(item =&gt; item / <span class="number">2</span>);</span><br><span class="line">     <span class="keyword">var</span> flowCompletion = <span class="keyword">new</span> DataflowLinkOptions &#123; PropagateCompletion = <span class="literal">true</span> &#125;;</span><br><span class="line">     multiplyBlock.LinkTo(addBlock, flowCompletion);</span><br><span class="line">     addBlock.LinkTo(divideBlock, flowCompletion);</span><br><span class="line">     <span class="keyword">return</span> DataflowBlock.Encapsulate(multiplyBlock, divideBlock);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>当您将mesh封装到自定义块中时，请考虑您希望向用户公开什么样的选项。考虑每个块选项应该(或不应该)如何传递到你的内部网格</strong>。在许多情况下，一些块选项不适用或没有意义。出于这个原因，自定义块通常定义自己的自定义选项，而不是接受<code>DataflowBlockOptions</code>参数。</p>
+<p><code>DataflowBlock.Encapsulate</code>将只封装具有一个输入块和一个输出块的网格。如果你有一个具有多个输入和&#x2F;或输出的可重用网格，你应该将其封装在一个自定义对象中，并将输入和输出作为<code>ITargetBlock&lt;T&gt;</code>;(用于输入)和<code>IReceiableleSourceBlock&lt;T&gt;</code>(输出)。</p>
+<p>这些示例都使用了封装来创建自定义块。也可以自己实现数据流接口，但要困难得多。微软有<a target="_blank" rel="noopener" href="http://bit.ly/tpl-dataflow">一篇文章</a>描述了创建自定义数据流块的高级技术。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C#</a>
+              <a href="/tags/DataFlow/" rel="tag"># DataFlow</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/09/25/%E5%BC%82%E6%AD%A5%E6%B5%81/" rel="prev" title="异步流">
+      <i class="fa fa-chevron-left"></i> 异步流
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DataFlow%E5%9F%BA%E7%A1%80"><span class="nav-number">1.</span> <span class="nav-text">DataFlow基础</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#5-1-%E9%93%BE%E6%8E%A5Block"><span class="nav-number">1.1.</span> <span class="nav-text">5.1 链接Block</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-2-%E4%BC%A0%E6%92%AD%E9%94%99%E8%AF%AF"><span class="nav-number">1.2.</span> <span class="nav-text">5.2 传播错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-3-%E5%8F%96%E6%B6%88%E9%93%BE%E6%8E%A5%E5%9D%97"><span class="nav-number">1.3.</span> <span class="nav-text">5.3 取消链接块</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-4-%E5%9D%97%E7%9A%84%E9%99%90%E6%B5%81"><span class="nav-number">1.4.</span> <span class="nav-text">5.4 块的限流</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-5-%E6%95%B0%E6%8D%AE%E6%B5%81%E5%9D%97%E5%B9%B6%E8%A1%8C%E5%A4%84%E7%90%86"><span class="nav-number">1.5.</span> <span class="nav-text">5.5 数据流块并行处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-6-%E5%88%9B%E5%BB%BA%E8%87%AA%E5%AE%9A%E4%B9%89%E5%9D%97"><span class="nav-number">1.6.</span> <span class="nav-text">5.6 创建自定义块</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">lycheewang</p>
+  <div class="site-description" itemprop="description">生似浮游</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">19</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">18</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">lycheewang</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
